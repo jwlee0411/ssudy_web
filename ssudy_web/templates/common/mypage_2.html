@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block static %}
+
+    <!-- Bootstrap core CSS -->
+<link href="/media/default/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      h7{
+          color:black;
+      }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+<br><br>
+
+<div class="container" style="font-family: 'IBM Plex Sans KR', sans-serif;  ">
+
+
+<h2><b style="color: black;">동아리 소개 수정</b></h2>
+        <h7>본 페이지에서 수정한 내용은 <a href="/clubs">[동아리 소개]</a> 페이지에 반영됩니다.</h7>
+        <br>
+        <h7>아래 예시 사진을 참고해 수정해주시기 바랍니다.</h7>
+        <br>
+        <h7>내용을 비워둘 경우, 해당 부분은 공란으로 등록됩니다.</h7>
+<br><br>
+        <h5>메인 페이지</h5>
+        <img src="/media/default/common_mypage_ex.png" width="400px">
+
+
+ <form method="post" enctype="multipart/form-data">
+
+{% csrf_token %}
+
+        <p class="h7"><div class="form-group">
+                    <input type="text" name="club_name" class="form-control" style="display: none" value="{{user.username}}" >
+     {% if new %}
+     <h7>분과 선택</h7>
+     * 분과를 잘못 선택할 경우, 되돌릴 수 없습니다!
+      <select class="form-select form-select-sm mb-3" aria-label=".form-select-lg example" name="club_category">
+                        <option selected value="없음">분과 선택</option>
+                            <option value="교양분과">교양분과</option>
+                    <option value="연대사업분과">연대사업분과</option>
+          <option value="연행예술분과">연행예술분과</option>
+          <option value="종교분과">종교분과</option>
+          <option value="창작전시분과">창작전시분과</option>
+          <option value="체육분과">체육분과</option>
+          <option value="학술분과">학술분과</option>
+                    </select>
+     {% else %}
+     <h7>분과명</h7>
+     <input type="text" name="club_category" class="form-control" value="{{post.club_category}}" disabled>
+     {% endif %}
+     <br>
+                    <h7>동아리 대표사진</h7>
+                    <input type="file" class="form-control" name="image" id="image">
+                    <br>
+                    <h7>동아리 한줄소개</h7>
+                    <input type="text" class="form-control" name="description" id="description" placeholder="동아리 한줄소개를 입력하세요.(100자 이내)" value="{{post.description}}">
+                    <br>
+      
+
+    <br><br><br>
+     <h5>상세정보 페이지</h5>
+     <img src="/media/default/common_mypage_ex2.png" width="500px">
+     <br><br>
+     {% if new %}
+<h7>창립연도</h7>
+      <input type="text" class="form-control" name="year" id="year" placeholder="창립연도를 입력하세요(잘못 입력할 경우, 되돌릴 수 없습니다!)" value="{{post.year}}">
+                    <br>
+     <h7>동아리방 위치</h7>
+      <input type="text" class="form-control" name="room" id="room" placeholder="동아리방 위치를 입력하세요(잘못 입력할 경우, 되돌릴 수 없습니다!)"  value="{{post.room}}">
+                    <br>
+     {% else %}
+     <h7>창립연도</h7>
+      <input type="text" class="form-control" name="year" id="year"  disabled value="{{post.year}}">
+                    <br>
+     <h7>동아리방 위치</h7>
+      <input type="text" class="form-control" name="room" id="room"  disabled value="{{post.room}}">
+                    <br>
+     {% endif %}
+     <h7>동아리 대표자명</h7>
+     <input type="text" class="form-control" name="leader" id="leader" placeholder="동아리 대표자명을 입력해주세요." value="{{post.leader}}">
+                    <br>
+    <h7>동아리 소개</h7>
+     <textarea class="form-control" name="intro_01" id="intro_01" placeholder="1000자 이내로 입력해주세요." >{{post.intro_01}}</textarea>
+                    <br>
+    <h7>활동 소개</h7>
+        <textarea class="form-control" name="intro_02" id="intro_02" placeholder="1000자 이내로 입력해주세요." >{{post.intro_02}}</textarea>
+                    <br>
+      <h7>SNS 1 이름</h7>
+                   <input type="text" class="form-control" name="sns1_name" id="sns1_name" placeholder="예시 : 인스타그램" value="{{post.sns1_name}}">
+                    <br>
+     <h7>SNS 1 링크</h7>
+     <br>* SNS 링크 등록 시, 링크 앞에 [https://]나 [http://]가 붙지 않는 경우 오류가 발생할 수 있습니다!<br>
+    <input type="text" class="form-control" name="sns1_link" id="sns1_link" placeholder="예시 : https://instagram.com/ssudy_2099" value="{{post.sns1_link}}">
+                    <br>
+     <h7>SNS 2 이름</h7>
+    <input type="text" class="form-control" name="sns2_name" id="sns2_name" placeholder="예시 : 카카오톡" value="{{post.sns2_name}}">
+                    <br>
+     <h7>SNS 2 링크</h7>
+    <input type="text" class="form-control" name="sns2_link" id="sns2_link" placeholder="https://open.kakao.com/o/abc1234" value="{{post.sns2_link}}">
+                    <br>
+
+    <h7>활동 사진</h7>
+     <input type="file" class="form-control" name="image_01" id="image_01">
+     <input type="file" class="form-control" name="image_02" id="image_02">
+     <input type="file" class="form-control" name="image_03" id="image_03">
+
+
+
+                </div><br>
+
+<button class="btn btn-primary" type="submit">동아리 소개 수정</button>
+  </form>
+
+</div>
+   <script src="/media/default/bootstrap.bundle.min.js"></script>
+
+{% endblock %}

@@ -1,0 +1,229 @@
+{% extends "base.html" %}
+{% block static %}
+    <script>
+
+
+document.getElementById('search2').onclick = function() {
+  // Get the value from the text input
+  var inputValue = document.getElementById('form1').value;
+
+
+  window.open('/board/create?search=' + encodeURIComponent(inputValue), '_self');
+};
+
+
+    </script>
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="container" style="font-family: 'IBM Plex Sans KR', sans-serif;  ">
+            <br><br>
+
+        {% if search %}
+        <h2 id = "titlefront" style="font-weight: 600; color:black;">검색결과</h2>
+        {% else %}
+         <h2 id = "titlefront" style="font-weight: 600"><a href="/board/list/{{aid}}" style="text-decoration:none; color:black;">{{title}}</a></h2>
+        {% endif %}
+
+        <br>
+    <table class="table table-hover" >
+        <thead>
+            <tr>
+                <th>번호</th>
+                {% if search or all %}
+                <th>게시판</th>
+                {% endif %}
+                <th>제목</th>
+                <th>작성자</th>
+                <th>날짜</th>
+<!--                <th>게시판</th>-->
+                {% if user.is_superuser %}
+                <th>첨부파일</th>
+                {% endif %}
+            </tr>
+        </thead>
+
+        <tbody>
+
+          {% for post in postImp %}
+
+
+
+            <tr>
+                <td style="color:red;"><b>공지</b></td>
+                {% if search or all %}
+                <td style="color:red;">중요 공지사항</td>
+                {% endif %}
+                <td><b><a style="color:red; text-decoration:none;" href=../read/{{post.id}}>{{ post.title }}</a></b></td>
+                <td>{{post.name}}</td>
+                <td>{{ post.create_date|date:'Y.m.d' }}</td>
+<!--                <td>{{ post.board }}</td>-->
+                {% if user.is_superuser %}
+                <td>
+                    {% if post.file1 != "" and post.file1 != Null %}
+                        <a href="../download/{{post.file1}}?path={{post.file1}}">1</a>
+                    {% endif %}
+                    {% if post.file2 != "" and post.file2 != Null %}
+                        <a href="../download/{{post.file2}}?path={{post.file2}}">2</a>
+                    {% endif %}
+                    {% if post.file3 != "" and post.file3 != Null %}
+                        <a href="../download/{{post.file3}}?path={{post.file3}}">3</a>
+                    {% endif %}
+                    {% if post.file4 != "" and post.file4 != Null %}
+                        <a href="../download/{{post.file4}}?path={{post.file4}}">4</a>
+                    {% endif %}
+                    {% if post.file5 != "" and post.file5 != Null %}
+                        <a href="../download/{{post.file5}}?path={{post.file5}}">5</a>
+                    {% endif %}
+
+
+
+                </td>
+                {% endif %}
+            </tr>
+
+
+        {% endfor %}
+
+
+        {% for post in posts %}
+
+
+            <tr>
+                <td>{{ post.id }}</td>
+                {% if search or all %}
+                <td>{{post.board}}</td>
+                {% endif %}
+                <td><a href=../read/{{post.id}} style="text-decoration:none; color:black;">{{ post.title }}</a></td>
+                <td>{{ post.name }}</td>
+                <td>{{ post.create_date |date:'Y.m.d' }}</td>
+<!--                <td>{{ post.board }}</td>-->
+                {% if user.is_superuser %}
+                  <td>
+                    {% if post.file1 != "" and post.file1 != Null %}
+                        <a href="../download/{{post.file1}}?path={{post.file1}}">1</a>
+                    {% endif %}
+                    {% if post.file2 != "" and post.file2 != Null %}
+                        <a href="../download/{{post.file2}}?path={{post.file2}}">2</a>
+                    {% endif %}
+                    {% if post.file3 != "" and post.file3 != Null %}
+                        <a href="../download/{{post.file3}}?path={{post.file3}}">3</a>
+                    {% endif %}
+                    {% if post.file4 != "" and post.file4 != Null %}
+                        <a href="../download/{{post.file4}}?path={{post.file4}}">4</a>
+                    {% endif %}
+                    {% if post.file5 != "" and post.file5 != Null %}
+                        <a href="../download/{{post.file5}}?path={{post.file5}}">5</a>
+                    {% endif %}
+                </td>
+                {% endif %}
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <hr>
+        <div style="float:left;">
+
+                    <form method="post" enctype="multipart/form-data">
+
+{% csrf_token %}
+
+<div class="input-group" style="font-family: 'IBM Plex Sans KR', sans-serif;  ">
+  <div class="form-outline">
+    <input name="search" type="text" id="form1" class="form-control" value="{{name}}" />
+
+  </div>
+    <button type="submit" id="search2">검색</button>
+</div></form>
+
+        </div>
+        {% if request.user.is_authenticated %}
+    <div style="float:right">
+        
+    <button class="btn btn-primary" type="submit" onclick="window.open('/board/create', '_self');">글쓰기</button>
+
+    </div>
+    {% endif %}
+    <br><br>
+
+
+
+       <!-- 페이징처리 시작 -->
+    <ul class="pagination justify-content-center" style="font-family: 'IBM Plex Sans KR', sans-serif;  ">
+        <!-- 이전페이지 -->
+        {% if posts.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ posts.previous_page_number }}">이전</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+        </li>
+        {% endif %}
+
+        {% if posts.number > 2  %}
+
+        <li class="page-item">
+
+            <a class="page-link" href="?page={{ 1 }}"> 1 </a>
+        </li>
+           <li class="page-item">
+            <span class="sr-only page-link">...</span>
+        </li>
+
+
+		        {% endif %}
+
+
+          {% for page_number in page_range %}
+
+        {% if page_number == posts.number %}
+
+        <li class="page-item active" aria-current="page">
+            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+        </li>
+        {% endif %}
+
+        {% endfor %}
+
+          {% if posts.number < max_index %}
+        <li class="page-item">
+            <span class="sr-only page-link">...</span>
+        </li>
+        <li class="page-item">
+
+            <a class="page-link" href="?page={{ max_index|add:'2' }}">{{ max_index|add:"2" }}</a>
+        </li>
+
+		        {% endif %}
+
+
+
+
+        <!-- 다음페이지 -->
+        {% if posts.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ posts.next_page_number }}">다음</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+        </li>
+        {% endif %}
+    </ul>
+    <!-- 페이징처리 끝 -->
+
+    </div>
+
+
+        <script src="/media/default/bootstrap.bundle.min.js"></script>
+
+{% endblock %}

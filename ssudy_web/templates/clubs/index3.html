@@ -1,0 +1,212 @@
+{% extends "base.html" %}
+
+{% block static %}
+
+    <!-- Bootstrap core CSS -->
+<link href="/media/default/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+
+  }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+
+
+
+  <div class="album py-5 bg-light" style="font-family: 'IBM Plex Sans KR', sans-serif;  ">
+    <div class="container">
+{% for club in clubs %}
+        <h2 style="font-weight:bold; color:black;">{{club.club_name}}</h2>
+        <br>
+
+        {% if club.year %}
+         <h5 style="font-weight:bold; color:black; ">✅ 창립연도</h5>
+        <div>{{club.year}}</div>
+
+        <br><br>
+        {% else %}
+        <h5 style="font-weight:bold; color:black;">✅ 창립연도</h5>
+        <div></div>
+
+        <br><br>
+        {% endif %}
+
+
+        {% if club.room %}
+        <h5 style="font-weight:bold; color:black;">✅ 동아리방 위치</h5>
+        <div>{{club.room}}</div>
+
+        <br><br>
+        {% else %}
+                <h5 style="font-weight:bold; color:black;">✅ 동아리방 위치</h5>
+        <div></div>
+
+        <br><br>
+        {% endif %}
+
+
+        {% if club.leader %}
+                <h5 style="font-weight:bold; color:black;">✅ 동아리대표자</h5>
+        <div>{{club.leader}}</div>
+
+        <br><br>
+        {% else %}
+                <h5 style="font-weight:bold; color:black;">✅ 동아리대표자</h5>
+        <div></div>
+
+        <br><br>
+        {% endif %}
+
+        {% if club.intro_01 %}
+         <h5 style="font-weight:bold; color:black;">✅ 동아리소개</h5>
+        <div>{{club.intro_01 | linebreaks}}</div>
+
+        <br><br>
+        {% else %}
+         <h5 style="font-weight:bold; color:black;">✅ 동아리소개</h5>
+        <div></div>
+
+        <br><br>
+        {% endif %}
+
+       {% if club.intro_02 %}
+         <h5 style="font-weight:bold; color:black;">✅ 활동소개</h5>
+        <div>{{club.intro_02 | linebreaks}}</div>
+
+        <br><br>
+        {% else %}
+         <h5 style="font-weight:bold; color:black;">✅ 활동소개</h5>
+        <div></div>
+
+        <br><br>
+        {% endif %}
+
+        {% if club.sns1_name != "" and club.sns1_name is not null and club.sns1_link != "" and club.sns1_link is not null and club.sns1_name != "None" %}
+        <h5 style="font-weight:bold; color:black;">✅ 웹사이트 / SNS</h5>
+        <div><a href="{{club.sns1_link}}" target="_blank">{{club.sns1_name}}</a></div>
+        <br>
+        {% else %}
+        <h5 style="font-weight:bold; color:black;">✅ 웹사이트 / SNS</h5>
+        <div></div>
+        <br>
+        {% endif %}
+        {% if club.sns2_name != "" and club.sns2_name is not null and club.sns2_link != "" and club.sns2_link is not null and club.sns2_name != "None"%}
+        <div><a href="{{club.sns2_link}}" target="_blank">{{club.sns2_name}}</a></div>
+        {% else %}
+
+        <div></div>
+        {% endif %}
+        <br><br>
+
+
+        <h5 style="font-weight:bold; color:black;">✅ 활동 사진</h5>
+<!--        {% if club.image_01 %}-->
+<!--         <img class="bd-placeholder-img image-thumbnail"  width="100%" height="100%"  src="/media/{{club.image_01}}">-->
+<!--        {% endif %}-->
+
+
+          <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+          {% if club.image_01 %}
+       <div class="col">
+          <div class="card shadow-sm">
+
+         <img class="bd-placeholder-img image-thumbnail"  width="100%" height="100%"  src="/media/{{club.image_01}}">
+
+            </div>
+          </div>
+          {% endif %}
+   {% if club.image_02 %}
+<div class="col">
+          <div class="card shadow-sm">
+
+         <img class="bd-placeholder-img image-thumbnail"  width="100%" height="100%"  src="/media/{{club.image_02}}">
+
+            </div>
+          </div>
+           {% endif %}
+{% if club.image_03 %}
+          <div class="col">
+          <div class="card shadow-sm">
+
+         <img class="bd-placeholder-img image-thumbnail"  width="100%" height="100%"  src="/media/{{club.image_03}}">
+
+            </div>
+          </div>
+           {% endif %}
+                  {% if club.image_04 %}
+<div class="col">
+          <div class="card shadow-sm">
+
+         <img class="bd-placeholder-img image-thumbnail"  width="100%" height="100%"  src="/media/{{club.image_04}}">
+
+            </div>
+          </div>
+        {% endif %} {% if club.image_05 %}
+          <div class="col">
+          <div class="card shadow-sm">
+
+         <img class="bd-placeholder-img image-thumbnail"  width="100%" height="100%"  src="/media/{{club.image_05}}">
+
+            </div>
+          </div>
+       {% endif %}
+    </div>
+  </div>
+
+
+</div>
+
+
+
+
+<!--        <div class="container">-->
+<!--  <div class="row">-->
+<!--    <div class="col-lg-3 col-md-4 col-sm-6"><div class="image-container">-->
+<!--      <img src="/media/default/club_01.jpg" alt="이미지 1">-->
+<!--    </div></div>-->
+<!--    <div class="col-lg-3 col-md-4 col-sm-6"><div class="image-container">-->
+<!--      <img src="/media/default/club_01.jpg" alt="이미지 1">-->
+<!--    </div></div>-->
+<!--      <div class="col-lg-3 col-md-4 col-sm-6"><div class="image-container">-->
+<!--      <img src="/media/default/club_01.jpg" alt="이미지 1">-->
+<!--    </div></div>-->
+<!--      <div class="col-lg-3 col-md-4 col-sm-6"><div class="image-container">-->
+<!--      <img src="/media/default/club_01.jpg" alt="이미지 1">-->
+<!--    </div></div>-->
+
+<!--  </div>-->
+<!--</div>-->
+
+
+{% endfor %}
+    </div>
+</div>
+
+
+
+
+
+   <script src="/media/default/bootstrap.bundle.min.js"></script>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block static %}
+
+{% endblock %}
+
+{% block content %}
+<br>
+{% if clubs.file2_1 != "" %}
+<img class="bd-placeholder-img image-thumbnail img-responsive" style="max-width: 100%;  display: block; margin: 0 auto;" src="/media/{{clubs.file2_1}}">
+{% endif %}
+{% if clubs.file2_2 != "" %}
+<img class="bd-placeholder-img image-thumbnail img-responsive" style="max-width: 100%;  display: block; margin: 0 auto;" src="/media/{{clubs.file2_2}}">
+{% endif %}
+{% if clubs.file2_3 != "" %}
+<img class="bd-placeholder-img image-thumbnail img-responsive" style="max-width: 100%;  display: block; margin: 0 auto;" src="/media/{{clubs.file2_3}}">
+{% endif %}
+<br><br><br>
+
+
+    <script src="/media/default/bootstrap.bundle.min.js"></script>
+
+
+
+{% endblock %}

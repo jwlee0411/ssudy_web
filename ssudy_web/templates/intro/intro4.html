@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block static %}
+
+{% endblock %}
+
+{% block content %}
+<br>
+
+
+<!--<iframe src="https://calendar.google.com/calendar/embed?src=ssu.ssudy%40gmail.com&ctz=Asia%2FSeoul" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>-->
+
+{% if clubs.file4_1 != "" %}
+<img class="bd-placeholder-img image-thumbnail img-responsive" style="max-width: 100%;  display: block; margin: 0 auto;" src="/media/{{clubs.file4_1}}">
+{% endif %}
+<br><br>
+{% if clubs.calendar_check != 1 %}
+<iframe src="https://calendar.google.com/calendar/embed?src=fbc5b1cc773d0f0c6463acf7757406f1cf53d0117753018cf207ca80e9ca05ac%40group.calendar.google.com&ctz=Asia%2FSeoul" style="max-width: 100%;  display: block; margin: 0 auto;" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+{% endif %}
+
+<br><br><br>
+
+    <script src="/media/default/bootstrap.bundle.min.js"></script>
+
+
+
+{% endblock %}

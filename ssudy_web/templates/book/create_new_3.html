@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+
+{% block static %}
+
+
+{% endblock %}
+
+{% block content %}
+<script>
+  $(document).ready(function() {
+    $("#main03").hide();
+    //    $("#main03").hide();
+
+    $('input[type=checkbox][name=test_list]').change(function () {
+      if ($(this).is(':checked')) {
+        //            alert(`${this.value} is checked`);
+        $("#main03").show();
+        //                $("#main03").show();
+      } else {
+        //            alert(`${this.value} is unchecked`);
+        $("#main03").hide();
+        //                $("#main03").hide();
+      }
+    });
+  });
+
+
+</script>
+
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">
+<br>
+
+<div class="container" style="font-family: 'IBM Plex Sans KR', sans-serif;  " id="main01">
+
+
+      <form method="post" enctype="multipart/form-data">
+{% csrf_token %}
+        <div class="my-3 p-3 bg-body rounded shadow-sm">
+
+
+            <h2 style="font-weight: 600; color:black;">장소사용 신청서</h2>
+
+            <hr>
+
+            <h7>
+                - 신청 동아리 : {{ user.username }} <br>
+                - 동아리 대표자 : {{ user.first_name }} <br>
+                - 연락처 : {{ user.phone_number }} <br>
+                - 신청 공동연습실 : {{ room_name }} <br>
+                - 신청 일시 : {{date}}
+                {% if reserve_time == 1 %}
+                    9:00 ~ 10:00
+                {% elif reserve_time == 2 %}
+                    10:00 ~ 11:00
+                {% elif reserve_time == 3 %}
+                    11:00 ~ 12:00
+                {% elif reserve_time == 4 %}
+                    12:00 ~ 13:00
+                {% elif reserve_time == 5 %}
+                    13:00 ~ 14:00
+                {% elif reserve_time == 6 %}
+                    14:00 ~ 15:00
+                {% elif reserve_time == 7 %}
+                    15:00 ~ 16:00
+                {% elif reserve_time == 8 %}
+                    16:00 ~ 17:00
+                {% elif reserve_time == 9 %}
+                    17:00 ~ 18:00
+                {% elif reserve_time == 10 %}
+                    18:00 ~ 19:00
+                {% elif reserve_time == 11 %}
+                    19:00 ~ 20:00
+                {% elif reserve_time == 12 %}
+                    20:00 ~ 21:00
+                {% elif reserve_time == 13 %}
+                    21:00 ~ 22:00
+                {% endif %}<br>
+
+
+            </h7>
+            <br><br>
+
+             사용 계획
+                  <div class="mb-3">
+                    <input name="reserve_desc_1" maxlength="100" class="form-control col-4" type="text" placeholder="사용 목적과 계획을 구체적으로 입력해 주세요. 예) OOOO 정기 리허설, OOOO 정기 총회" aria-label=".form-control-sm example">
+                </div>
+        사용 성격
+                    <div class="mb-3">
+                    <input name="reserve_desc_2" maxlength="100" class="form-control col-4" type="text" placeholder="예) 리허설, 컨퍼런스 등" aria-label=".form-control-sm example">
+                </div>
+        사용 인원
+                    <div class="mb-3">
+                    <input name="reserve_num" maxlength="100" class="form-control col-4" type="number" placeholder="대략적인 사용 예정 인원을 숫자로만 입력해 주세요." aria-label=".form-control-sm example">
+                </div>
+        특이사항
+        <div class="mb-3">
+                    <input name="reserve_desc_3" maxlength="100" class="form-control col-4" type="text" placeholder="반입장비가 있는 경우, 비상연락망 등" aria-label=".form-control-sm example">
+                </div>
+
+
+            <br>
+
+              <h4 style="color:black;">대관 준수사항</h4>
+
+            <hr>
+
+            <h7>
+                - 주중 대관시간은 6시간을 최대로 한다.<br>
+
+                - 각 소속 별 1명만 신청이 가능하며, 2명 이상 신청할 수 없다.<br>
+
+                 - 연습실 내에서는 절대 금연이며, 주류 및 음식물의 반입을 절대 금지한다.<br>
+
+                 - 연습실 기물 및 집기파손 시 파손을 확인 신고한 해당 동아리 직전 사용 동아리가 모든 책임을 진다.<br>
+
+                 - 연습실시설의 정상적인 운영 및 관리를 방해하는 행위를 일체 금지하며, 상기 사항을 위반 시, 추후 연습실 대관에 있어서 불이익을 받을 수 있다.<br>
+
+                 - 준수사항 위반 시 경고 조치, 경고 3회 이상 시 1년 대관 불가하다.<br>
+
+
+            </h7>
+  <br>  <br>
+
+             <h4 style="color:black;">주의사항</h4>
+
+            <hr>
+
+            <h7>
+                - 위 정보가 정확한지 확인 후 신청해야 하며, 빈칸이 있거나 올바르지 않은 정보가 있을 경우 <a href="/common/mypage1">회원정보 수정</a> 페이지에서 수정 후 신청해야 합니다.<br>
+
+                - 신청이 완료되기 전 다른 단체에서 시간대를 먼저 신청한 경우나 일요일 및 공휴일, 그 외 동아리연합회에서 공동연습실 사용이 어렵다고 판단한 날에는 신청할 수 없습니다.<br>
+                (일요일을 제외한 공휴일의 경우 시스템 상에서 신청이 가능하다고 표시되더라도 사용이 불가능합니다.)<br>
+
+                 - 신청이 완료되었더라도 교내 수업으로 인한 공동연습실 사용, 시설 유지보수 등의 이유로 공동연습실 사용이 불가할 수 있습니다.<br>
+
+
+
+            </h7>
+
+
+        <br><br>
+
+
+             <div class="row justify-content-center">
+
+    <div class="col-md-12 text-center"> <input type="checkbox" name="test_list" value="1" id="check">위 내용을 숙지하였으며, 해당 내용에 동의합니다.</div>
+
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-md-12 text-center"><br>
+        <button class="btn btn-primary" name="main03" id="main03" type="submit">신청하기</button>
+      </div>
+  </div>
+
+
+
+        </div>
+
+      </form>
+    </div>
+
+
+
+
+    <div class="container" id="main02">
+
+
+
+    </div>
+<br>
+
+
+
+
+        <script src="/media/default/bootstrap.bundle.min.js"></script>
+        <script src="/media/default/cheatsheet.css"></script>
+  <script src="/media/default/dashboard.css"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+{% endblock %}

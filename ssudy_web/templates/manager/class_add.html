@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block static %}
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/cheatsheet/">
+
+
+
+
+    <link href="/media/default/bootstrap.min.css" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<br>
+
+{% if user.is_superuser %}
+
+<h2>공동연습실 생성</h2>
+<div style="color:red;"><b>주의 : 공동연습실 이름에 공백(띄어쓰기) 들어가거나, 같은 이름의 공동연습실을 여러 개 생성하면 오류가 발생합니다!!</b></div>
+<div>연습실명은 최대한 짧게 작성해주세요</div>
+
+
+
+
+
+        <form method="post" enctype="multipart/form-data">
+
+{% csrf_token %}
+
+                <p class="h7"><br><br>
+            <textarea class="form-control" name="name" id="name" placeholder="공동연습실 이름을 입력하세요" aria-multiline="true"></textarea>
+    <br><br>
+                    <div class="form-group">
+             <input type="checkbox" name="confirm" id="confirm"> 승인 필요
+                    <br>위 체크박스를 체크하면 동아리에서 공동연습실을 신청했을 때 바로 신청 기록이 저장되지 않고, 승인 후 사용할 수 있도록 변경됩니다.
+        </div>
+            <br><br>
+            <div style="float:right">
+
+                <button class="btn btn-primary" type="submit">저장</button>
+            </div>
+
+
+
+
+
+        </form>
+
+
+
+
+    <br><br>
+
+    <script src="/media/default/bootstrap.bundle.min.js"></script>
+
+
+{% else %}
+관리자 페이지에 접근할 수 없습니다.
+
+{% endif %}
+
+
+{% endblock %}

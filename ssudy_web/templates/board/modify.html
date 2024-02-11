@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block static %}
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+ <link href="/media/default/bootstrap.min.css" rel="stylesheet">
+
+{% endblock %}
+
+{% block content %}
+<br>
+{% if user.is_authenticated %}
+
+
+      <div class="container" style="font-family: 'IBM Plex Sans KR', sans-serif;  ">
+        <form method="post" enctype="multipart/form-data">
+
+{% csrf_token %}
+
+            <div class="my-3 p-3 bg-body rounded shadow-sm">
+
+                <h2 style="font-weight: 600; color:black;">게시물 수정</h2>
+                <br>
+
+                <div class="mb-3 col-md-6 col-3">
+                    <select class="form-select form-select-sm mb-3" aria-label=".form-select-lg example" name="board">
+                        <option selected value="{{post.board}}">{{post.board}}</option>
+                        {% for board in Board %}
+                        {% if user.is_superuser %}
+                            <option value="{{board.board_title}}">{{board.board_title}}</option>
+                        {% else %}
+                           {% if not board.is_superuser %}
+                            <option value="{{board.board_title}}">{{board.board_title}}</option>
+                            {% endif %}
+                        {% endif %}
+                        {% endfor %}
+
+                    </select>
+                </div>
+                <div>
+                                  {% if user.is_superuser %}
+                    <div class="mb-3 col-md-6 col-3">
+            <input name="name" class="form-control mb-3 col-md-6 col-3" value="{{user.username}}" placeholder="닉네임 변경(해당 글에만 적용)" style="font-size:13px">
+                        </div>
+
+                        {% else %}
+            <input name="name" class="form-control mb-3 col-md-6 col-3" value="{{user.username}}" style="font-size:13px; display: none;" readonly>
+            {% endif %}
+
+
+                </div>
+                <div class="mb-3">
+                    <input name="title" maxlength="100" class="form-control col-4" type="text" value="{{post.title}}" placeholder="제목을 입력하세요." aria-label=".form-control-sm example" required id="id_title">
+                </div>
+
+                <div class="mb-3">
+                    <textarea class="form-control form-control-sm" rows="15" placeholder="내용을 입력하세요." name="contents" required id="id_contents">{{post.contents}}</textarea>
+                </div>
+
+
+                <br><br>
+                <h5 style="font-weight: 600;   color:black;">첨부파일</h5>
+                <p class="h7">파일은 최대 5개, 개당 20MB까지 첨부 가능합니다.</p>
+
+                <p class="h7"><div class="form-group">
+
+                    <input type="file" class="form-control" name="file1" id="file1" value="{{post.file1}}">
+                {% if post.file1 %}
+                => 현재 첨부된 파일 : <a href="/board/download/{{post.file1}}?path={{post.file1}}">{{post.file1}}</a>                  <br>
+                {% endif %}
+                </div>
+
+                <p class="h7"><div class="form-group">
+                    <input type="file" class="form-control" name="file2" id="file2">
+                 {% if post.file2 %}
+               => 현재 첨부된 파일 : <a href="/board/download/{{post.file2}}?path={{post.file2}}">{{post.file2}}</a>                  <br>
+               {% endif %}
+                </div>
+
+                <p class="h7"><div class="form-group">
+                    <input type="file" class="form-control" name="file3" id="file3">
+                 {% if post.file3 %}
+              => 현재 첨부된 파일 : <a href="/board/download/{{post.file3}}?path={{post.file3}}">{{post.file3}}</a>                  <br>
+               {% endif %}
+                </div>
+
+                <p class="h7"><div class="form-group">
+                    <input type="file" class="form-control" name="file4" id="file4">
+                 {% if post.file4 %}
+               => 현재 첨부된 파일 : <a href="/board/download/{{post.file4}}?path={{post.file4}}">{{post.file4}}</a>                  <br>
+              {% endif %}
+                </div>
+                <p class="h7"><div class="form-group">
+                    <input type="file" class="form-control" name="file5" id="file5">
+                                 {% if post.file5 %}
+             => 현재 첨부된 파일 : <a href="/board/download/{{post.file5}}?path={{post.file5}}">{{post.file5}}</a>                  <br>
+                {% endif %}
+                </div>
+
+                <br><br>
+                <input name="file_reset" id="file_reset" type="checkbox"><span style="color:black;">첨부한 파일 모두 삭제</span>
+                <div style="color:red">해당 옵션을 선택 시 기존에 첨부한 파일을 모두 삭제하고, 새 파일이 첨부되지 않습니다.</div>
+            </div>
+
+
+
+
+
+
+            <div style="float:right">
+
+                <button class="btn btn-primary" type="submit">저장</button>
+            </div>
+
+        </form>
+
+
+
+    </div>
+
+
+    <br><br>
+
+        <script src="/media/default/bootstrap.bundle.min.js"></script>
+
+
+
+{% else %}
+
+<script>
+
+    alert('권한이 없습니다. 로그인 후 이용해주세요.')
+    window.history.back()
+</script>
+
+{% endif %}
+{% endblock %}

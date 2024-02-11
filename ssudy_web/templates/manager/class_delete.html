@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block static %}
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/media/default/bootstrap.min.css" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<br>
+
+{% if user.is_superuser %}
+
+<h2>공동연습실 삭제</h2>
+<h5 style="color:red;">아래 버튼을 클릭하는 순간 즉시 해당 공동연습실에 대한 모든 기록(예약내역 포함)이 삭제되며, 해당 공동연습실을 더 이상 예약하거나 취소할 수 없습니다.
+    </h5><br>
+같은 이름으로 공동연습실을 재 생성시 복구할 수 있습니다.
+
+
+{% csrf_token %}
+
+                <p class="h7">
+
+{% for club in clubs %}
+                <a href="./{{club.id}}"><button type="button" class="btn btn-sm btn-outline-primary ">{{club.name}}</button></a> &nbsp;
+{% endfor %}
+
+
+
+            <br><br>
+            <div style="float:left">
+<a href="/manager">
+                <button class="btn btn-primary" type="submit">이전 화면으로</button></a>
+            </div>
+
+
+
+
+
+
+    <br><br>
+
+    <script src="/media/default/bootstrap.bundle.min.js"></script>
+
+
+{% else %}
+관리자 페이지에 접근할 수 없습니다.
+
+{% endif %}
+
+
+{% endblock %}

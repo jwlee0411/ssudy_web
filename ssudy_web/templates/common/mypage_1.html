@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block static %}
+
+    <!-- Bootstrap core CSS -->
+<link href="/media/default/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+<br><br>
+
+<div class="container" style="font-family: 'IBM Plex Sans KR', sans-serif;  ">
+
+
+<h2><b style="color: black;">회원정보 수정</b></h2>
+
+ <form method="post" enctype="multipart/form-data">
+
+{% csrf_token %}
+
+        <p class="h7"><div class="form-group">
+                    <input type="text" name="username" class="form-control" style="display: none" value="{{user.username}}" >
+     {% for group in user.groups.all %}
+{% if group.name == "동아리" %}
+                    <h7>대표자명</h7>
+     <input type="text" class="form-control" name="first_name" id="first_name" value="{{user.first_name}}" placeholder="동아리 대표자명을 입력해주세요.">
+                    <br>
+     <h7>대표자 학번</h7>
+                    <input type="text" class="form-control" name="num" id="num" value="{{user.num}}" placeholder="동아리 대표자의 학번을 입력해주세요.">
+                    <br>
+     <h7>대표자 학과</h7>
+                    <input type="text" class="form-control" name="dept" id="dept" value="{{user.dept}}" placeholder="동아리 대표자의 학과를 입력해주세요.">
+                    <br>
+                    <h7>전화번호</h7>
+                    <input type="text" class="form-control" name="phone_number" id="phone_number" value="{{user.phone_number}}" placeholder="동아리 대표자의 전화번호를 입력해주세요.">
+                    <br>
+     {% else %}
+     <h7>이름</h7>
+     <input type="text" class="form-control" name="first_name" id="first_name" value="{{user.first_name}}" placeholder="이름을 입력해주세요.">
+                    <br>
+                    <h7>전화번호</h7>
+                    <input type="text" class="form-control" name="phone_number" id="phone_number" value="{{user.phone_number}}" placeholder="전화번호를 입력해주세요.">
+                    <br>
+
+     {% endif %}
+
+      <h7>이메일</h7>
+     {% if request.user.email2 == "" %}
+     <input type="text" class="form-control" name="email" value="{{user.email}}" placeholder="이메일을 입력해주세요.">
+
+     {% else %}
+     <div class="input-group">
+                    <input type="text" class="form-control" name="email" value="{{user.email}}" placeholder="이메일을 입력해주세요.">
+                <select class="form-select" aria-label=".form-select-lg example" name="email2">
+                        <option selected value="@soongsil.ac.kr">@soongsil.ac.kr</option>
+                     <option value="@ssu.ac.kr">@ssu.ac.kr</option>
+                </select>
+    </div>
+     {% endif %}
+
+
+     {% endfor %}
+
+
+
+
+                </div>
+
+
+     <br>
+
+<button class="btn btn-primary" type="submit">수정완료</button>
+  </form>
+</div>
+
+   <script src="/media/default/bootstrap.bundle.min.js"></script>
+
+{% endblock %}

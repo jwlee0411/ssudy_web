@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% block static %}
+
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+    table{
+        text-align:center;
+    }
+</style>
+
+            <br><br>
+    <div class="container" style="font-family: 'IBM Plex Sans KR', sans-serif;  ">
+
+    {% if date == "today" %}
+        <h2 id = "titlefront" style="font-weight: 600; color:black;">오늘의 장소사용 시간표</h2>
+        {% else %}
+        <h2 id = "titlefront" style="font-weight: 600; color:black;">장소사용 시간표({{date}})</h2>
+        {% endif %}
+
+
+
+        <br>
+    <table class="table table-hover" >
+        <thead>
+            <tr>
+                <th>시간</th>
+                {% for i in room %}
+                <th>{{i.name}}
+                    </th>
+                {% endfor %}
+
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for i in numbers %}
+        <tr>
+            {% if i == "1" %}
+                    <td>9:00 ~ 10:00</td>
+            {% for j in reserve_dict.0 %}
+
+
+            <td>{{j}}</td> {% endfor %}
+            {% elif i == "2" %}
+                    <td>10:00 ~ 11:00</td>
+            {% for j in reserve_dict.1 %} <td>{{j}}</td> {% endfor %}
+             {% elif i == "3" %}
+                    <td>11:00 ~ 12:00</td>
+            {% for j in reserve_dict.2 %} <td>{{j}}</td> {% endfor %}
+               {% elif i == "4" %}
+                    <td>12:00 ~ 13:00</td>
+            {% for j in reserve_dict.3 %} <td>{{j}}</td> {% endfor %}
+             {% elif i == "5" %}
+                    <td>13:00 ~ 14:00</td>
+            {% for j in reserve_dict.4 %} <td>{{j}}</td> {% endfor %}
+             {% elif i == "6"  %}
+                    <td>14:00 ~ 15:00</td>
+            {% for j in reserve_dict.5 %} <td>{{j}}</td> {% endfor %}
+             {% elif i == "7" %}
+                    <td>15:00 ~ 16:00</td>
+            {% for j in reserve_dict.6 %} <td>{{j}}</td> {% endfor %}
+             {% elif i == "8" %}
+                    <td>16:00 ~ 17:00</td>
+            {% for j in reserve_dict.7 %} <td>{{j}}</td> {% endfor %}
+             {% elif i == "9" %}
+                    <td>17:00 ~ 18:00</td>
+            {% for j in reserve_dict.8 %} <td>{{j}}</td> {% endfor %}
+             {% elif i == "10" %}
+                    <td>18:00 ~ 19:00</td>
+            {% for j in reserve_dict.9 %} <td>{{j}}</td> {% endfor %}
+             {% elif i == "11" %}
+                    <td>19:00 ~ 20:00</td>
+            {% for j in reserve_dict.10 %} <td>{{j}}</td> {% endfor %}
+             {% elif i == "12" %}
+                    <td>20:00 ~ 21:00</td>
+            {% for j in reserve_dict.11 %} <td>{{j}}</td> {% endfor %}
+             {% elif i == "13" %}
+                    <td>21:00 ~ 22:00</td>
+            {% for j in reserve_dict.12 %} <td>{{j}}</td> {% endfor %}
+                {% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </tr>
+
+        {% endfor %}
+
+
+        </tbody>
+    </table>
+
+    <hr>
+        <div style="float:left;">
+
+
+
+
+
+<div class="input-group" style="font-family: 'IBM Plex Sans KR', sans-serif;  ">
+  <div class="form-outline">
+      다른 날짜 확인 :
+            <input type="date" id="datePicker" min="" max="" onchange="handleDateChange()">
+
+  </div>
+
+</div>
+
+        </div>
+
+
+
+
+    <br><br>
+
+
+
+    </div>
+
+<script>
+ // 날짜 변경 이벤트 핸들러
+  function handleDateChange() {
+    var selectedDate = datePicker.value;
+    console.log("선택된 날짜:", selectedDate);
+
+    var newUrl = '/book/list_admin/' + selectedDate;
+     window.location.href = newUrl;
+
+
+
+  }
+
+</script>
+        <script src="/media/default/bootstrap.bundle.min.js"></script>
+
+{% endblock %}

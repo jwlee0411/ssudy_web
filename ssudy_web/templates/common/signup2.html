@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+
+<link href="/media/default/bootstrap.min.css" rel="stylesheet">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+    </style>
+
+
+
+  <body class="text-center">
+  <div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+<main class="form-signin w-100 m-auto">
+  <br> <br> <br> <br> <br> <br> <br>
+    <div class="container my-3">
+    <form method="post">
+        {% csrf_token %}
+        {% include "form_errors.html" %}
+         <img class="mb-4" src="/media/default/ssudy_logo_main.png" alt="" width="232" height="94">
+<br><br>
+    <h5>이메일을 통해 발송된 인증번호를 입력해주세요<br></h5>(인증번호가 도착하지 않거나 오류가 발생한 경우 동아리연합회로 문의해 주세요)<br>
+
+        <br>
+        <input type="text" class="form-control" name="verify" id="verify"
+                   value="{{ form.verify.value|default_if_none:'' }}">
+        <br>
+          <button type="submit" class="w-100 btn btn-lg btn-primary">확인</button>
+    </form>
+    </div>
+
+
+
+</main>
+</div></div></div>
+     <script src="/media/default/bootstrap.bundle.min.js"></script>
+
+  </body>
+
+{% endblock %}

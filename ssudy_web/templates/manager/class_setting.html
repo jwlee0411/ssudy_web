@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block static %}
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/cheatsheet/">
+
+
+
+
+    <link href="/media/default/bootstrap.min.css" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<br>
+
+{% if user.is_superuser %}
+
+<h2>공동연습실 신청기간 설정</h2>
+
+        <form method="post" enctype="multipart/form-data">
+
+{% csrf_token %}
+
+                <p class="h7"><br><br>
+                    동아리 공동연습실 신청기간
+                    매월 <input type="number" name="club_start">일 오픈 / <input type="number" name="club_end">일 전까지 신청 가능
+                </p>
+               <br><br>
+
+             <p class="h7"><br><br>
+                    숭실인 공동연습실 신청기간
+                    매월 <input type="number" name="stu_start">일 오픈 / <input type="number" name="stu_end">일 전까지 신청 가능
+             </p>
+               <br><br>
+
+
+        </div>
+            <br><br>
+            <div style="float:right">
+
+                <button class="btn btn-primary" type="submit">저장</button>
+            </div>
+
+
+
+
+
+        </form>
+
+
+
+
+    <br><br>
+
+    <script src="/media/default/bootstrap.bundle.min.js"></script>
+
+
+{% else %}
+관리자 페이지에 접근할 수 없습니다.
+
+{% endif %}
+
+
+{% endblock %}

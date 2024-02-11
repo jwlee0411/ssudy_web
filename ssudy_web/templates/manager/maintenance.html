@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block static %}
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/cheatsheet/">
+
+
+
+
+    <link href="/media/default/bootstrap.min.css" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<br>
+
+{% if user.is_superuser %}
+
+<h1>사이트 점검 모드 실행</h1>
+<h5 style="font-weight:bold; color:red;">📢 주의 : 이 기능은 사이트 관리자만 실행해야 합니다.<br>
+사이트 점검 모드를 실행했을 때 사이트에 어떤 영향을 미치는지 모르거나 사이트 점검 모드를 해제하는 방법을 모르는 경우 절대 이 기능을 실행해서는 안 됩니다.<br></h5>
+사이트 점검 사유를 입력하지 않고 실행 버튼을 누르면 사이트 점검이 해제됩니다.<br>
+
+
+
+        <form method="post" enctype="multipart/form-data">
+
+{% csrf_token %}
+
+                <p class="h7"><div class="form-group">
+                    <input type="text" class="form-control" placeholder="사이트 점검 사유를 입력하세요." name="text" id="text">
+                </div>
+
+            <br><br>
+            <div style="float:right">
+
+                <button class="btn btn-primary" type="submit">실행</button>
+            </div>
+
+
+
+
+
+        </form>
+
+
+
+
+    <br><br>
+
+    <script src="/media/default/bootstrap.bundle.min.js"></script>
+
+
+{% else %}
+관리자 페이지에 접근할 수 없습니다.
+
+{% endif %}
+
+
+{% endblock %}

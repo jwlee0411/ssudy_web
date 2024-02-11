@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+
+{% block static %}
+
+    <!-- Bootstrap core CSS -->
+<link href="/media/default/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+
+  <div class="album py-5 bg-light" style="font-family: 'IBM Plex Sans KR', sans-serif;  ">
+    <div class="container">
+
+        <h2 style="font-weight:600; color:black;">동아리 소개</h2>
+        <h5>숭실대학교의 중앙동아리를 소개합니다. </h5>
+         <h5>분과를 클릭하면 각 분과별 페이지로 이동합니다. </h5>
+        <br>
+    <div class="col">
+
+            <a href="/clubs/1" style=" text-decoration:none; color:black;">
+            <div class="card">
+              <div class="row g-12">
+                <div class="col-md-2">
+                 <img class="bd-placeholder-img image-thumbnail"  width="100%" height="100%" style="object-fit: cover;" src="/media/default/club_01.jpg">
+                </div>
+                <div class="col-md-10">
+                  <div class="card-body">
+                    <h3 class="card-title" style="font-weight:bold;">교양분과</h3>
+
+<!--                    <p class="card-text"><div style="font-size:17;"> </div> </p><br>-->
+                      <br>
+<!--                      <h5 class="card-title" style="font-weight:bold;">소속 동아리 </h5><p class="card-text"><small class="text-muted">-->
+                      {% for club in clubs %}
+          {% if club.club_category == "교양분과" %}
+                    {{club.club_name}} &nbsp;
+                      {% endif %}{% endfor %}
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+</a>
+       <br><br>
+
+        <a href="/clubs/2" style=" text-decoration:none; color:black;">
+            <div class="card">
+              <div class="row g-12">
+                <div class="col-md-2">
+                 <img class="bd-placeholder-img image-thumbnail"  width="100%" height="100%" style="object-fit: cover;" src="/media/default/club_03.jpg">
+                </div>
+                <div class="col-md-10">
+                  <div class="card-body">
+                    <h3 class="card-title" style="font-weight:bold;">연대사업분과</h3>
+
+<!--                    <p class="card-text"><div style="font-size:17;">교양분과는 학문과 예술을 넓히며 다양한 분야의 지식을 공유하는 동아리들의 모임입니다. </div> </p><br>-->
+                      <br>
+
+                      {% for club in clubs %}
+          {% if club.club_category == "연대사업분과" %}
+                    {{club.club_name}} &nbsp;
+                      {% endif %}{% endfor %}
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+</a>
+<br><br>
+        <a href="/clubs/3" style=" text-decoration:none; color:black;">
+            <div class="card">
+              <div class="row g-12">
+                <div class="col-md-2">
+                 <img class="bd-placeholder-img image-thumbnail"  width="100%" height="100%" style="object-fit: cover;" src="/media/default/club_02.jpg">
+                </div>
+                <div class="col-md-10">
+                  <div class="card-body">
+                    <h3 class="card-title" style="font-weight:bold;">연행예술분과</h3>
+                      <br>
+                      {% for club in clubs %}
+          {% if club.club_category == "연행예술분과" %}
+                    {{club.club_name}} &nbsp;
+                      {% endif %}{% endfor %}
+                          </small></p>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+</a>
+<br><br>
+        <a href="/clubs/4" style=" text-decoration:none; color:black;">
+            <div class="card">
+              <div class="row g-12">
+                <div class="col-md-2">
+                 <img class="bd-placeholder-img image-thumbnail"  width="100%" height="100%" style="object-fit: cover;" src="/media/default/club_05.jpg">
+                </div>
+                <div class="col-md-10">
+                  <div class="card-body">
+                    <h3 class="card-title" style="font-weight:bold;">종교분과</h3>
+<br>
+                      {% for club in clubs %}
+          {% if club.club_category == "종교분과" %}
+                    {{club.club_name}} &nbsp;
+                      {% endif %}{% endfor %}
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+</a>
+<br><br>
+        <a href="/clubs/5" style=" text-decoration:none; color:black;">
+            <div class="card">
+              <div class="row g-12">
+                <div class="col-md-2">
+                 <img class="bd-placeholder-img image-thumbnail"  width="100%" height="100%" style="object-fit: cover;" src="/media/default/club_06.jpg">
+                </div>
+                <div class="col-md-10">
+                  <div class="card-body">
+                    <h3 class="card-title" style="font-weight:bold;">창작전시분과</h3><br>
+
+                      {% for club in clubs %}
+          {% if club.club_category == "창작전시분과" %}
+                    {{club.club_name}} &nbsp;
+                      {% endif %}{% endfor %}
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+</a>
+<br><br>
+        <a href="/clubs/6" style=" text-decoration:none; color:black;">
+            <div class="card">
+              <div class="row g-12">
+                <div class="col-md-2">
+                 <img class="bd-placeholder-img image-thumbnail"  width="100%" height="100%" style="object-fit: cover;" src="/media/default/club_07.jpg">
+                </div>
+                <div class="col-md-10">
+                  <div class="card-body">
+                    <h3 class="card-title" style="font-weight:bold;">체육분과</h3><br>
+
+
+                      {% for club in clubs %}
+          {% if club.club_category == "체육분과" %}
+                    {{club.club_name}} &nbsp;
+                      {% endif %}{% endfor %}
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+</a>
+<br><br>
+        <a href="/clubs/7" style=" text-decoration:none; color:black;">
+            <div class="card">
+              <div class="row g-12">
+                <div class="col-md-2">
+                 <img class="bd-placeholder-img image-thumbnail"  width="100%" height="100%" style="object-fit: cover;" src="/media/default/club_08.jpg">
+                </div>
+                <div class="col-md-10">
+                  <div class="card-body">
+                    <h3 class="card-title" style="font-weight:bold;">학술분과</h3><br>
+
+
+                      {% for club in clubs %}
+          {% if club.club_category == "학술분과" %}
+                    {{club.club_name}} &nbsp;
+                      {% endif %}{% endfor %}
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+</a>
+
+
+
+          </div>
+
+    </div>
+  </div>
+
+
+
+
+
+   <script src="/media/default/bootstrap.bundle.min.js"></script>
+
+{% endblock %}

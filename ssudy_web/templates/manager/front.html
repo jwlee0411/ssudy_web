@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block static %}
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link href="/media/default/bootstrap.min.css" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<br>
+
+{% if user.is_superuser %}
+
+<h2>사이트 대문 변경</h2>
+변경 후에는 기존 창으로 되돌릴 수 없습니다.<br>영역 1은 필수 항목이며, 파일을 첨부하지 않을 경우 해당 영역은 보이지 않습니다.<br>
+
+<br><br>
+
+        <form method="post" enctype="multipart/form-data">
+
+{% csrf_token %}
+
+
+                <p class="h7"><div class="form-group">
+                    <h3>영역 1</h3>
+
+                    <input type="file" class="form-control" name="file1" id="file1">
+                    <br>
+                    <input type="text" class="form-control" name="title1" id="title1" placeholder="제목을 입력하세요">
+                    <br>
+                    <textarea class="form-control" name="content1" id="content1" placeholder="내용을 입력하세요" aria-multiline="true"></textarea>
+                    <br><br><br>
+                </div>
+
+
+
+             <p class="h7"><div class="form-group">
+                    <h3>영역 2</h3>
+
+                    <input type="file" class="form-control" name="file2" id="file2">
+                    <br>
+                    <input type="text" class="form-control" name="title2" id="title2" placeholder="제목을 입력하세요">
+                    <br>
+                    <textarea class="form-control" name="content2" id="content2" placeholder="내용을 입력하세요" aria-multiline="true"></textarea>
+                    <br><br><br>
+                </div>
+
+
+
+
+
+             <p class="h7"><div class="form-group">
+                    <h3>영역 3</h3>
+
+                    <input type="file" class="form-control" name="file3" id="file3">
+                    <br>
+                    <input type="text" class="form-control" name="title3" id="title3" placeholder="제목을 입력하세요">
+                    <br>
+                    <textarea class="form-control" name="content3" id="content3" placeholder="내용을 입력하세요" aria-multiline="true"></textarea>
+                    <br><br><br>
+
+                </div>
+
+            <br><br>
+
+
+
+            <div style="float:right">
+
+                <button class="btn btn-primary" type="submit">저장</button>
+            </div>
+
+
+        </form>
+
+
+
+
+    <br><br>
+
+    <script src="/media/default/bootstrap.bundle.min.js"></script>
+
+
+{% else %}
+관리자 페이지에 접근할 수 없습니다.
+
+{% endif %}
+
+
+{% endblock %}

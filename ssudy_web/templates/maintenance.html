@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<body>
+<div class="container row" style="float: none; margin:100 auto;">
+    <div class="col-md-9" style="float: none; margin:0 auto; text-align: center;">
+<br><br><br>
+        <img class="mb-4" src="/media/default/ssudy_logo_500.png" alt="" width="232" height="92">
+
+          <h1 style="text-align:center;">사이트 점검 중입니다.</h1>
+<br>
+        <div style="text-align:center;">
+             이용에 불편을 드려 대단히 죄송합니다.<br>
+            {{text|linebreaks}}<br><br>
+        </div>
+
+    <a href="/">
+        <button class="btn btn-primary">메인으로</button>
+    </a>
+
+
+
+
+    </div>
+</div>
+
+
+    <script src="/media/default/bootstrap.bundle.min.js"></script>
+
+</body>
+
+
+{% endblock %}

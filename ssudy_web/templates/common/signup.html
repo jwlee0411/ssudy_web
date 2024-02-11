@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% if messages %}
+    <div>
+        {% for message in messages %}
+            {{ message.tags }}! {{ message.message }}
+        {% endfor %}
+    </div>
+{% endif %}
+
+
+
+{% block content %}
+<script>
+function selectNum(){
+
+var numSelect = document.getElementById("num");
+
+
+
+// text 가져오기
+
+var text = numSelect.options[document.getElementById("num").selectedIndex].text;
+
+
+
+// option value 가져오기
+
+var value = numSelect.options[document.getElementById("num").selectedIndex].value;
+
+if(value=="동아리"){
+
+    document.getElementById("mn2").style.visibility = "visible";
+    document.getElementById("mn3").style.visibility = "visible";
+}
+else{
+
+    document.getElementById("mn2").style.visibility = "hidden";
+    document.getElementById("mn3").style.visibility = "hidden";
+}
+
+console.log(value);
+
+}
+</script>
+
+
+<div class="container my-3" style="font-family: 'IBM Plex Sans KR', sans-serif;  ">
+    <form method="post" action="{% url 'common:signup' %}">
+        {% csrf_token %}
+        {% include "form_errors.html" %}
+        <div class="mb-3">
+            <label for="username"><h4 style="color:black;">ID</h4></label>
+            <input type="text" class="form-control" name="username" id="username"
+                   value="{{ form.username.value|default_if_none:'' }}">
+        </div><br>
+        <div class="mb-3">
+            <label for="password1"><h4 style="color:black;">비밀번호</h4></label>
+            <input type="password" class="form-control" name="password1" id="password1"
+                   value="{{ form.password1.value|default_if_none:'' }}">
+        </div><br>
+        <div class="mb-3">
+            <label for="password2"><h4 style="color:black; ">비밀번호 확인</h4></label>
+            <input type="password" class="form-control" name="password2" id="password2"
+                   value="{{ form.password2.value|default_if_none:'' }}">
+        </div><br>
+
+            <div class="mb-3">
+            <label for="first_name"><h4 style="color:black; ">이름</h4></label>
+            <input type="text" class="form-control" name="first_name" id="first_name" placeholder=""
+                   value="{{ form.first_name.value|default_if_none:'' }}">
+        </div><br>
+
+        <div class="mb-3">
+            <label for="email"><h4 style="color:black;">이메일</h4></label><br>숭실대학교 이메일(@soongsil.ac.kr, @ssu.ac.kr)만 사용 가능합니다.<br><br>
+            <div class="row">
+                <div class="col-md-6"> <input type="text" class="form-control" name="email" id="email"
+                   value="{{ form.email.value|default_if_none:'' }}"></div>
+                <div class="col-md-6">  <select class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="selectNum()" id="email2" name="email2">
+  <option selected value="@soongsil.ac.kr">@soongsil.ac.kr</option>
+  <option value="@ssu.ac.kr">@ssu.ac.kr</option>
+
+</select> </div>
+            </div>
+
+        </div><br>
+
+        <div class="mb-3">
+            <label for="phone_number"><h4 style="color:black;">연락처</h4></label>
+            <input type="tel" class="form-control" name="phone_number" id="phone_number"
+                   value="{{ form.phone_number.value|default_if_none:'' }}">
+        </div>
+<br>
+
+        <div style="color:red; font-weight: 600;">아래 [회원가입] 버튼을 누르면 이메일 인증이 진행됩니다.<br>
+            숭실대학교 이메일을 사용하지 않거나 이메일 인증을 진행할 수 없는 경우 동아리연합회로 문의해 주세요.</div>
+        <br>
+
+        <button type="submit" class="btn btn-primary">회원가입</button>
+    </form>
+</div>
+
+    <script src="/media/default/bootstrap.bundle.min.js"></script>
+
+{% endblock %}

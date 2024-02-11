@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+
+    <div class="container" style="font-family: 'IBM Plex Sans KR', sans-serif;  ">
+            <br><br>
+
+
+
+
+ <div class="my-3 p-3 bg-body rounded shadow-sm">
+
+
+
+
+
+
+             <h2 style="font-weight: 600; color:black;">주의사항</h2>
+
+            <hr>
+
+            <h7>
+
+                - 공동연습실 / 학생회관 동아리방 신청은 이 페이지에 하셔도 반영되지 않습니다.<br>
+                - 동아리연합회와 학생서비스팀의 승인 후 [출력하기] 버튼을 눌러 강의실 대여 신청서와 동아리 활동계획서를 출력하셔서 관리팀에 방문해 최종 승인을 받아야 해당 일시에 이용이 가능합니다.<br>
+                - 강의실 이용 관련 최종 승인 권한은 관리팀에 있습니다.<br>
+
+            </h7>
+
+        </div>
+
+
+
+        <br>
+        <h2 id = "titlefront" style="font-weight: 600; color:black;">강의실 신청내역</h2>
+    <table class="table table-hover" >
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>신청 동아리</th>
+                <th>신청장소</th>
+                <th>신청일시</th>
+                <th>사용일시</th>
+                <th>동아리연합회</th>
+                <th>학생서비스팀</th>
+                <th>출력</th>
+                <th>신청취소</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+
+
+
+        {% for post in posts %}
+
+
+            <tr>
+                <td>{{ post.id }}</td>
+                <td><a href=../read/{{post.id}} style="text-decoration:none; color:black;">{{ post.club }}</a></td>
+                <td><a href=../read/{{post.id}} style="text-decoration:none; color:black;">{{ post.space }}</a></td>
+                <td><a href=../read/{{post.id}} style="text-decoration:none; color:black;">{{ post.create_date |date:'Y.m.d H:i' }}</a></td>
+                <td><a href=../read/{{post.id}} style="text-decoration:none; color:black;">{{ post.date }}</a></td>
+                {% if post.dy != "" %}
+                 <td><a href=../read/{{post.id}} style="text-decoration:none; color:black;">승인완료</a></td>
+                      {% else %}
+                <td style="color:red; font-weight:bold;"><a href=../read/{{post.id}} style="text-decoration:none; color:red;">승인필요</a></td>
+                {% endif %}
+
+                {% if post.stu != "" %}
+                 <td><a href=../read/{{post.id}} style="text-decoration:none; color:black;">승인완료</a></td>
+                {% else %}
+                <td style="color:red; font-weight:bold;"><a href=../read/{{post.id}} style="text-decoration:none; color:red;">승인필요</a></td>
+               {% endif %}
+
+                {% if post.dy != "" and post.stu != "" %}
+                <td style="color:blue; font-weight:bold;"><a href=../print/{{post.id}}-{{post.checksum}} style="text-decoration:none;">출력하기</a></td>
+                {% else %}
+                <td>출력불가</td>
+                {% endif %}
+                {% if post.dy != "" and post.stu != "" %}
+                <td></td>
+                {% else %}
+                <td><a href=../delete/{{post.id}} style="text-decoration:none; color:red;">취소</a></td>
+                {% endif %}
+
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <hr>
+ <div style="float:right">
+     <button class="btn btn-outline-primary" type="submit" onclick="window.open('/class', '_self');">신청서 진위여부 확인</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <button class="btn btn-primary" type="submit" onclick="window.open('/class/create', '_self');">새 신청</button>
+
+
+    </div>
+
+    </div>
+
+    <br><br>
+
+
+
+
+       <!-- 페이징처리 시작 -->
+    <ul class="pagination justify-content-center" style="font-family: 'IBM Plex Sans KR', sans-serif;  ">
+        <!-- 이전페이지 -->
+        {% if posts.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ posts.previous_page_number }}">이전</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+        </li>
+        {% endif %}
+
+        {% if posts.number > 2  %}
+
+        <li class="page-item">
+
+            <a class="page-link" href="?page={{ 1 }}"> 1 </a>
+        </li>
+           <li class="page-item">
+            <span class="sr-only page-link">...</span>
+        </li>
+
+
+		        {% endif %}
+
+
+          {% for page_number in page_range %}
+
+        {% if page_number == posts.number %}
+
+        <li class="page-item active" aria-current="page">
+            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+        </li>
+        {% endif %}
+
+        {% endfor %}
+
+          {% if posts.number < max_index %}
+        <li class="page-item">
+            <span class="sr-only page-link">...</span>
+        </li>
+        <li class="page-item">
+
+            <a class="page-link" href="?page={{ max_index|add:'2' }}">{{ max_index|add:"2" }}</a>
+        </li>
+
+		        {% endif %}
+
+
+
+
+        <!-- 다음페이지 -->
+        {% if posts.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ posts.next_page_number }}">다음</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+        </li>
+        {% endif %}
+    </ul>
+    <!-- 페이징처리 끝 -->
+
+    </div>
+
+        <script src="/media/default/bootstrap.bundle.min.js"></script>
+
+{% endblock %}

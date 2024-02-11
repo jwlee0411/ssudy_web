@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block static %}
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+    <link href="/media/default/bootstrap.min.css" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<br>
+
+{% if user.is_superuser %}
+
+<h2>메인 팝업창 변경</h2>
+변경 후에는 기존 창으로 되돌릴 수 없습니다.<br><br>
+
+
+
+        <form method="post" enctype="multipart/form-data">
+
+{% csrf_token %}
+
+                <p class="h7"><div class="form-group">
+                    <input type="file" class="form-control" name="file1" id="file1">
+                </div>
+
+            <br><br>
+            <div style="float:right">
+
+                <button class="btn btn-primary" type="submit">저장</button>
+            </div>
+
+
+        </form>
+
+
+
+
+    <br><br>
+
+    <script src="/media/default/bootstrap.bundle.min.js"></script>
+
+
+{% else %}
+관리자 페이지에 접근할 수 없습니다.
+
+{% endif %}
+
+
+{% endblock %}

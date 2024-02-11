@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block static %}
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link href="/media/default/bootstrap.min.css" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<br>
+
+{% if user.is_superuser %}
+
+<h2>동아리연합회 소개 페이지 수정</h2>
+변경 후에는 기존 창으로 되돌릴 수 없습니다.<br>
+반드시 페이지당 1개 이상의 사진을 첨부해야 합니다. (예 : 동연소개 -> "달력" 부분만 수정할 경우에도 "소개", "조직도", "소통채널" 페이지에 들어갈 사진 첨부해야 함) <br>
+회칙 페이지에는 pdf, 나머지 페이지에는 jpg, png 파일만 등록 가능합니다.
+<br><br>
+
+        <form method="post" enctype="multipart/form-data">
+
+{% csrf_token %}
+
+
+                <p class="h7"><div class="form-group">
+                    <h3>동아리연합회 소개</h3>
+                    <input type="file" class="form-control" name="file1-1" id="file1-1">
+                    <input type="file" class="form-control" name="file1-2" id="file1-2">
+                    <input type="file" class="form-control" name="file1-3" id="file1-3">
+                 <br><br><br>
+                </div>
+
+                <p class="h7"><div class="form-group">
+                    <h3>조직도</h3>
+                    <input type="file" class="form-control" name="file2-1" id="file2-1">
+                    <input type="file" class="form-control" name="file2-2" id="file2-2">
+                    <input type="file" class="form-control" name="file2-3" id="file2-3">
+                 <br><br><br>
+                </div>
+
+                <p class="h7"><div class="form-group">
+                    <h3>소통 채널</h3>
+                    <input type="file" class="form-control" name="file3-1" id="file3-1">
+                    <input type="file" class="form-control" name="file3-2" id="file3-2">
+                    <input type="file" class="form-control" name="file3-3" id="file3-3">
+                 <br><br><br>
+                </div>
+
+            <p class="h7"><div class="form-group">
+                    <h3>회칙</h3>
+
+                    <input type="file" class="form-control" name="file5-1" id="file5-1">
+
+                 <br><br><br>
+                </div>
+
+                <p class="h7"><div class="form-group">
+                    <h3>달력</h3>
+                    <input type="file" class="form-control" name="file4-1" id="file4-1">
+                    <input type="checkbox" name="calendar-check" id="calendar-check"> Google 캘린더 사용 안함
+                 <br><br><br>
+                </div>
+
+
+            <br><br>
+
+
+
+            <div style="float:right">
+
+                <button class="btn btn-primary" type="submit">저장</button>
+            </div>
+
+
+        </form>
+
+
+
+
+    <br><br>
+
+    <script src="/media/default/bootstrap.bundle.min.js"></script>
+
+
+{% else %}
+관리자 페이지에 접근할 수 없습니다.
+
+{% endif %}
+
+
+{% endblock %}

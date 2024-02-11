@@ -1,0 +1,247 @@
+ㅇ{% extends "base.html" %}
+{% block static %}
+
+{% endblock %}
+
+{% block content %}
+
+            <br><br>
+    <div class="container" style="font-family: 'IBM Plex Sans KR', sans-serif;  ">
+
+
+{% if name != "" %}
+        <h2 id = "titlefront" style="font-weight: 600; color:black; text-decoration: none;"><a href="/book/list_new" style="text-decoration: none; color: black;">{{name}} 신청내역</a></h2>
+
+        {% else %}
+        <h2 id = "titlefront" style="font-weight: 600; color:black; text-decoration: none;"><a href="/book/list_new" style="text-decoration: none; color: black;">장소사용 신청내역</a></h2>
+{% endif %}
+
+
+        <br>
+    <table class="table table-hover" >
+        <thead>
+            <tr>
+
+                <th>연습실 종류</th>
+                <th>예약 일자</th>
+                <th>예약 시간</th>
+
+                {% if user.is_superuser %}
+                <th>동아리명</th>
+                <th>대표자명</th>
+                <th>연락처</th>
+                <th>이메일</th>
+                {% endif %}
+                <th>신청서</th>
+                <th>승인</th>
+                <th>취소</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+
+
+
+        {% for post in posts %}
+
+
+            <tr>
+
+                <td>{{post.room}}</td>
+                <td>{{ post.reserve_date |date:"Y년 m월 d일" }}</td>
+                {% if post.reserve_time == "1" %}
+                    <td>9:00 ~ 10:00</td>
+                {% elif post.reserve_time == "2" %}
+                    <td>10:00 ~ 11:00</td>
+                {% elif post.reserve_time == "3" %}
+                    <td>11:00 ~ 12:00</td>
+                {% elif post.reserve_time == "4" %}
+                    <td>12:00 ~ 13:00</td>
+                {% elif post.reserve_time == "5" %}
+                    <td>13:00 ~ 14:00</td>
+                {% elif post.reserve_time == "6" %}
+                    <td>14:00 ~ 15:00</td>
+                {% elif post.reserve_time == "7" %}
+                    <td>15:00 ~ 16:00</td>
+                {% elif post.reserve_time == "8" %}
+                    <td>16:00 ~ 17:00</td>
+                {% elif post.reserve_time == "9" %}
+                    <td>17:00 ~ 18:00</td>
+                {% elif post.reserve_time == "10" %}
+                    <td>18:00 ~ 19:00</td>
+                {% elif post.reserve_time == "11" %}
+                    <td>19:00 ~ 20:00</td>
+                {% elif post.reserve_time == "12" %}
+                    <td>20:00 ~ 21:00</td>
+                {% elif post.reserve_time == "13" %}
+                    <td>21:00 ~ 22:00</td>
+                {% endif %}
+                   {% if user.is_superuser %}
+
+                <td>{{post.user_name}}</td>
+                <td>{{post.user_id}}</td>
+                <td>{{post.user_tel}}</td>
+                <td>{{post.user_email}}</td>
+                <td><a href="/book/read_new/{{post.id}}" style="text-decoration: none; color: blue;">보기</a></td>
+                 {% if post.confirm %}
+                <td style="color:green;">승인완료</td>
+                    {% else %}
+                    <td style="color:blue;"><a href="/book/confirm_new/{{post.id}}" style="color:blue; text-decoration:none;"><b>승인대기</b></a></td>
+                    {% endif %}
+                {% else%}
+                <td><a href="/book/read_new/{{post.id}}" style="text-decoration: none; color: blue;">보기</a></td>
+                {% if post.confirm %}
+                <td style="color:green;">승인완료</td>
+                    {% else %}
+                <td style="color:blue;"><b>승인대기</b></td>
+                {% endif %}
+            {% endif %}
+                {% if post.reserve_date > today %}
+                <td><a href="/book/cancel_new/{{post.id}}" style="color:red; text-decoration:none;">취소</a></td>
+                {% elif user.is_superuser %}
+                 <td><a href="/book/cancel_new/{{post.id}}" style="color:red; text-decoration:none;">취소</a></td>
+                {% else %}
+                <td></td>
+                {% endif %}
+            </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+        {% if not user.is_superuser %}
+   <div style="text-align:center;"> * 신청 취소는 신청기간 내에만 가능합니다. </div>
+        {% endif %}
+    <hr>
+        <div style="float:left;">
+
+
+날짜별 조회
+<div class="input-group" style="font-family: 'IBM Plex Sans KR', sans-serif;  ">
+  <div class="form-outline">
+            <input type="date" id="datePicker" min="" max="" onchange="handleDateChange2()">
+  </div>
+
+</div>
+
+        </div>
+
+
+
+
+
+    <div style="float:right">
+   연습실별 조회 &nbsp;&nbsp;&nbsp;
+
+         <select class="form-select" aria-label=".form-select example" name="board" id="board" onchange="handleDateChange()">
+                        <option selected value="없음">공동연습실 선택</option>
+                        {% for i in room %}
+                            <option value="{{i.name}}">{{i.name}}</option>
+                        {% endfor %}
+                    </select>
+
+    </div>
+
+    <br><br>
+
+
+
+       <!-- 페이징처리 시작 -->
+    <ul class="pagination justify-content-center" style="font-family: 'IBM Plex Sans KR', sans-serif;  ">
+        <!-- 이전페이지 -->
+        {% if posts.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ posts.previous_page_number }}">이전</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+        </li>
+        {% endif %}
+
+        {% if posts.number > 2  %}
+
+        <li class="page-item">
+
+            <a class="page-link" href="?page={{ 1 }}"> 1 </a>
+        </li>
+           <li class="page-item">
+            <span class="sr-only page-link">...</span>
+        </li>
+
+
+		        {% endif %}
+
+
+          {% for page_number in page_range %}
+
+        {% if page_number == posts.number %}
+
+        <li class="page-item active" aria-current="page">
+            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+        </li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+        </li>
+        {% endif %}
+
+        {% endfor %}
+
+          {% if posts.number < max_index %}
+        <li class="page-item">
+            <span class="sr-only page-link">...</span>
+        </li>
+        <li class="page-item">
+
+            <a class="page-link" href="?page={{ max_index|add:'2' }}">{{ max_index|add:"2" }}</a>
+        </li>
+
+		        {% endif %}
+
+
+
+
+        <!-- 다음페이지 -->
+        {% if posts.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ posts.next_page_number }}">다음</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+        </li>
+        {% endif %}
+    </ul>
+    <!-- 페이징처리 끝 -->
+
+    </div>
+
+<script>
+ // 날짜 변경 이벤트 핸들러
+  function handleDateChange() {
+    var selectedDate = board.value;
+<!--    console.log("선택된 날짜:", selectedDate);-->
+    if (selectedDate != "없음"){
+    var newUrl = '/book/list_new/room/' + selectedDate;
+     window.location.href = newUrl;
+    }
+
+
+  }
+
+    function handleDateChange2() {
+    var selectedDate = datePicker.value;
+<!--    console.log("선택된 날짜:", selectedDate);-->
+
+    var newUrl = '/book/list_new/' + selectedDate;
+     window.location.href = newUrl;
+
+
+
+  }
+
+</script>
+        <script src="/media/default/bootstrap.bundle.min.js"></script>
+
+{% endblock %}

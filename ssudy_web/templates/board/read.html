@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+{% load ssudy_web_tags %}
+
+{% block static %}
+   <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/cheatsheet/">
+
+
+
+
+    <link href="/media/default/bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+
+
+{% if post %}
+
+
+    <div class="container" style="font-family: 'IBM Plex Sans KR', sans-serif; ">
+
+        <div class="my-3 p-3 bg-body rounded shadow-sm">
+
+        {{post.board}}
+        <br>
+        <h2 style="font-weight: 600;   color:black;">{{post.title}}</h2>
+
+        <span style="font-weight: 600;   color:black;">{{post.name}}</span> | {{ post.create_date|date:'Y.m.d H:i' }}
+<hr>
+
+        <h7>
+            {{ post.contents | mark }}
+        </h7>
+
+        <br><br>        <br><br>
+            <h5 style="font-weight: 600;   color:black;">첨부파일</h5>
+
+            {% if post.file1 != "" and post.file1 != Null %}
+            <p class="h7">{{ post.file1 }} &nbsp;<a href="../download/{{post.file1}}?path={{post.file1}}"><span class="badge bg-primary">다운로드</span></a></p>
+            {% endif %}
+            {% if post.file2 != "" and post.file2 != Null %}
+            <p class="h7">{{ post.file2 }} &nbsp;<a href="../download/{{post.file2}}?path={{post.file2}}"><span class="badge bg-primary">다운로드</span></a></p>
+            {% endif %}
+            {% if post.file3 != "" and post.file3 != Null %}
+            <p class="h7">{{ post.file3 }} &nbsp;<a href="../download/{{post.file3}}?path={{post.file3}}"><span class="badge bg-primary">다운로드</span></a></p>
+            {% endif %}
+             {% if post.file4 != "" and post.file4 != Null %}
+            <p class="h7">{{ post.file4 }} &nbsp;<a href="../download/{{post.file4}}?path={{post.file4}}"><span class="badge bg-primary">다운로드</span></a></p>
+            {% endif %}
+            {% if post.file5 != "" and post.file5 != Null %}
+            <p class="h7">{{ post.file5 }} &nbsp;<a href="../download/{{post.file5}}?path={{post.file5}}"><span class="badge bg-primary">다운로드</span></a></p>
+            {% endif %}
+
+        </div>
+
+
+{% if user.is_authenticated %}
+    {% if user.is_superuser %}
+        <div style="float:right">
+            <a href="../modify/{{post.id}}"><button class="btn" type="submit">수정</button></a>
+
+            <a href="../delete/{{post.id}}"><button class="btn btn-danger" type="submit">삭제</button></a>
+        </div>
+
+    {% elif user.username == post.name %}
+            <div style="float:right">
+            <a href="../modify/{{post.id}}"><button class="btn" type="submit">수정</button></a>
+
+            <a href="../delete/{{post.id}}"><button class="btn btn-danger" type="submit">삭제</button></a>
+        </div>
+        {% endif %}
+
+{% endif %}
+    </div>
+
+{% endif %}
+
+        <script src="/media/default/bootstrap.bundle.min.js"></script>
+{% endblock %}

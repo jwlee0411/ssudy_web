@@ -1,0 +1,196 @@
+{% load static %}
+
+<html lang="ko">
+  <head>
+      <script src="/media/default/popper.min.js"></script>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <title>숭실대학교 동아리연합회</title>
+      <script src="/media/default/jquery-3.3.1.slim.min.js"></script>
+      <script src="/media/default/popper.min.v2.js"></script>
+      <script src="/media/default/bootstrap.min.js"></script>
+      <link rel="icon" type="image/x-icon" href="/media/default/fabicon.png">
+      <link href="/media/default/bootstrap.min.css" rel="stylesheet">
+      <link href="/media/default/carousel.css" rel="stylesheet">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;600&display=swap" rel="stylesheet">
+    {% block style %}
+    {% endblock %}
+
+
+
+  </head>
+  <body>
+
+<header>
+
+  <nav class="navbar navbar-expand-xl navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/" style="font-family: 'IBM Plex Sans KR', sans-serif; font-weight: 600; font-size:x-large;">숭실대학교 동아리연합회</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+
+             <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink1" role="button" data-bs-toggle="dropdown" aria-expanded="false"  style="font-family: 'IBM Plex Sans KR', sans-serif; font-size:large;">
+            동아리연합회 소개
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink" style="font-family: 'IBM Plex Sans KR', sans-serif;">
+                <li><a class="dropdown-item" href="/intro/intro1">소개</a></li>
+              <li><a class="dropdown-item" href="/intro/intro5">회칙</a></li>
+                <li><a class="dropdown-item" href="/intro/intro2">조직도</a></li>
+                <li><a class="dropdown-item" href="/intro/intro3">소통 채널</a></li>
+                <li><a class="dropdown-item" href="/intro/intro4">일정</a></li>
+          </ul>
+        </li>
+
+
+
+
+              <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="/clubs" id="navbarDarkDropdownMenuLink4" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-family: 'IBM Plex Sans KR', sans-serif; font-size:large;">
+            동아리 소개
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink" style="font-family: 'IBM Plex Sans KR', sans-serif;">
+            <li><a class="dropdown-item" href="/clubs">소개</a></li>
+              <li></li>
+              <li><a class="dropdown-item" href="/clubs/1">교양분과</a></li>
+            <li><a class="dropdown-item" href="/clubs/2">연대사업분과</a></li>
+            <li><a class="dropdown-item" href="/clubs/3">연행예술분과</a></li>
+            <li><a class="dropdown-item" href="/clubs/4">종교분과</a></li>
+            <li><a class="dropdown-item" href="/clubs/5">창작전시분과</a></li>
+            <li><a class="dropdown-item" href="/clubs/6">체육분과</a></li>
+            <li><a class="dropdown-item" href="/clubs/7">학술분과</a></li>
+          </ul>
+        </li>
+
+{% for group in user.groups.all %}
+{% if group.name == "동아리" or group.name == "동아리연합회" %}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink5" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-family: 'IBM Plex Sans KR', sans-serif; font-size:large;">
+            장소사용
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink5" style="font-family: 'IBM Plex Sans KR', sans-serif;">
+            <li><a class="dropdown-item" href="/book/create_new">장소사용 신청</a></li>
+              {% if group.name == "동아리연합회" %}
+              <li><a class="dropdown-item" href="/book/create_new_admin">장소사용 신청(관리자용)</a></li>
+              {% endif %}
+              <li><a class="dropdown-item" href="/book/list_new">장소사용 신청내역</a></li>
+              <li><a class="dropdown-item" href="/book/list_admin">장소사용 시간표</a></li>
+              <li><a class="dropdown-item" href="/class/list">강의실 대여</a></li>
+          </ul>
+        </li>
+
+
+             <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink3" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-family: 'IBM Plex Sans KR', sans-serif; font-size:large;">
+            활동보고서
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink" style="font-family: 'IBM Plex Sans KR', sans-serif;">
+            <li><a class="dropdown-item" href="/board/list/11">교양분과</a></li>
+            <li><a class="dropdown-item" href="/board/list/12">연대사업분과</a></li>
+            <li><a class="dropdown-item" href="/board/list/13">연행예술분과</a></li>
+            <li><a class="dropdown-item" href="/board/list/14">종교분과</a></li>
+            <li><a class="dropdown-item" href="/board/list/15">창작전시분과</a></li>
+            <li><a class="dropdown-item" href="/board/list/16">체육분과</a></li>
+            <li><a class="dropdown-item" href="/board/list/17">학술분과</a></li>
+          </ul>
+        </li>
+
+            {% endif %}
+
+            {% if group.name == "학생서비스팀" %}
+             <li class="nav-item dropdown">
+                <a class="nav-link" href="/class/list" style="font-family: 'IBM Plex Sans KR', sans-serif; font-size:large;">
+            교내이용시설 승인
+          </a>
+            </li>
+            {% endif %}
+
+            {% if group.name == "숭실인"  %}
+             <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink5" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-family: 'IBM Plex Sans KR', sans-serif; font-size:large;">
+            장소사용
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink5" style="font-family: 'IBM Plex Sans KR', sans-serif;">
+              <li><a class="dropdown-item" href="/book/create_new">공동연습실 신청</a></li>
+
+              <li><a class="dropdown-item" href="/book/list_new">공동연습실 내역</a></li>
+              <li><a class="dropdown-item" href="/book/list_admin">공동연습실 시간표</a></li>
+          </ul>
+        </li>
+            {% endif %}
+            {% endfor %}
+
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink2" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-family: 'IBM Plex Sans KR', sans-serif; font-size:large;">
+            공지사항
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink" style="font-family: 'IBM Plex Sans KR', sans-serif;">
+
+<!--               {% for board in Board %}-->
+<!--              <li><a class="dropdown-item" href="">{{board.board_title}}</a></li>-->
+<!--                        {% endfor %}-->
+                <li><a class="dropdown-item" href="/board/list/2">공지사항</a></li>
+                <li><a class="dropdown-item" href="/board/list/3">회의록</a></li>
+                <li><a class="dropdown-item" href="/board/list/4">각종 서식</a></li>
+              {% for group in user.groups.all %}
+{% if group.name == "동아리" or group.name == "동아리연합회" %}
+              <li><a class="dropdown-item" href="/board/list/6">서류 제출</a></li>
+              {% endif %}
+              {% endfor %}
+              {% if user.is_superuser %}
+                <li><a class="dropdown-item" href="/board/list/5">기존 자료</a></li>
+              <li><a class="dropdown-item" href="/board/list/0">전체글보기</a></li>
+              {% endif %}
+          </ul>
+        </li>
+        {% if user.is_superuser %}
+            <li class="nav-item dropdown">
+                <a class="nav-link" href="/manager" style="font-family: 'IBM Plex Sans KR', sans-serif; font-size:large;">
+            관리자 페이지
+          </a>
+            </li>
+
+    {% endif %}
+    {% if not user.is_authenticated %}
+            <li class="nav-item dropdown">
+                <a class="nav-link" href="/book/list_admin" style="font-family: 'IBM Plex Sans KR', sans-serif; font-size:large;">
+            공동연습실 시간표
+          </a>
+            </li>
+
+    {% endif %}
+
+
+        </ul>
+          {% if user.is_authenticated %}
+
+            <div><a href="/common/mypage" style="color:white; text-decoration: none; font-family: 'IBM Plex Sans KR', sans-serif; font-size:large;">{{user.username}}</a>님,  환영합니다.&nbsp;&nbsp;&nbsp;</div>
+          <button class="btn btn-outline-success" onclick="location.href='/common/logout'" style="font-family: 'IBM Plex Sans KR', sans-serif; font-size:large;">로그아웃</button>
+
+
+          {% else %}
+          <button class="btn btn-outline-success" onclick="location.href='/common/login'" style="font-family: 'IBM Plex Sans KR', sans-serif; font-size:large;">로그인</button>
+          {% endif %}
+      </div>
+    </div>
+  </nav>
+
+</header>
+
+      {% block content %}
+
+    {% endblock %}
+    <br>   <br>   <br>   <br>   <br>   <br>   <br>   <br>   <br>
+  <footer class="blog-footer" style="text-align:center; font-family: 'IBM Plex Sans KR', sans-serif; ">
+  <p><span style="font-weight: 600;">숭실대학교 동아리연합회</span><br><br>서울특별시 동작구 상도로 369, 학생회관 104호 / (우)06978<br>369, Sangdo-ro, Dongjak-gu, Seoul, Republic of Korea</p>
+
+    <p><a href="/terms" style="font-weight: 600;">이용약관</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/privacy" style="font-weight: 600;">개인정보처리방침</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/ban" style="font-weight: 600;">금지 행위 안내</a></p>
+
+</footer>
+  </body></html>

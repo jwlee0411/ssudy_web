@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% load static %}
+{% load ssudy_web_tags %}
+
+{% block static %}
+   <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/cheatsheet/">
+
+
+
+
+    <link href="/media/default/bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+
+
+{% if post %}
+
+{% if user.is_authenticated %}
+    {% if user.is_superuser or user.username == post.user_name %}
+
+
+    <div class="container" style="font-family: 'IBM Plex Sans KR', sans-serif;  ">
+
+        <div class="my-3 p-3 bg-body rounded shadow-sm">
+
+        <br>
+        <h2 style="font-weight: 600; color:black;">학생회관 대관 신청서</h2>
+            <br>
+
+        <h3 style="color:black;">1. 대관 신청 단체</h3>
+        <hr>
+
+            <div>동아리명 : {{post.user_name}}</div>
+            <div>대표자 성명 : {{post.user_id}}</div>
+            <div>대표자 연락처 : {{post.user_tel}}</div>
+            <div>이메일 : {{post.user_email}}</div>
+
+        <br><br>
+
+
+        <h3 style="color:black;">2. 사용 계획</h3>
+        <hr>
+
+            <div>사용 계획 : {{post.reserve_desc_1}}</div>
+            <div>사용 성격 : {{post.reserve_desc_2}}</div>
+            <div>사용 인원 : {{post.reserve_num}}</div>
+            <div>특이사항 : {{post.reserve_desc_3}}</div>
+
+            <br><br>
+
+         <h3 style="color:black;">3. 대관 장소 및 일시</h3>
+        <hr>
+
+            <div>대관 공동연습실 : {{post.room}}</div>
+            <div>대관 기간 : {{post.reserve_date |date:'Y.m.d'}}
+                {% if post.reserve_time == "1" %}
+                    9:00 ~ 10:00
+                {% elif post.reserve_time == "2" %}
+                    10:00 ~ 11:00
+                {% elif post.reserve_time == "3" %}
+                    11:00 ~ 12:00
+                {% elif post.reserve_time == "4" %}
+                    12:00 ~ 13:00
+                {% elif post.reserve_time == "5" %}
+                    13:00 ~ 14:00
+                {% elif post.reserve_time == "6" %}
+                    14:00 ~ 15:00
+                {% elif post.reserve_time == "7" %}
+                    15:00 ~ 16:00
+                {% elif post.reserve_time == "8" %}
+                    16:00 ~ 17:00
+                {% elif post.reserve_time == "9" %}
+                    17:00 ~ 18:00
+                {% elif post.reserve_time == "10" %}
+                    18:00 ~ 19:00
+                {% elif post.reserve_time == "11" %}
+                    19:00 ~ 20:00
+                {% elif post.reserve_time == "12" %}
+                    20:00 ~ 21:00
+                {% elif post.reserve_time == "13" %}
+                    21:00 ~ 22:00
+                {% endif %}
+
+            </div>
+
+
+
+
+            신청일시 : {{post.register_time |date:'Y.m.d H:i'}}
+
+            <br><br>
+            <div class="col-md-12 text-center"> {% if post.confirm %} {% else %} <b style="color: red;">동아리연합회 승인을 기다리고 있습니다. 승인 후 이용이 가능합니다.</b><br>{% endif %}</div>
+
+
+        </div>
+
+
+
+    </div>
+    {% else %}
+    권한이 없습니다.
+
+
+    {% endif %}
+
+{% endif %}
+
+
+
+{% endif %}
+
+        <script src="/media/default/bootstrap.bundle.min.js"></script>
+{% endblock %}

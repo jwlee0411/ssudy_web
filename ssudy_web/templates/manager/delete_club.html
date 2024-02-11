@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block static %}
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/media/default/bootstrap.min.css" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<br>
+
+{% if user.is_superuser %}
+
+<h2>동아리 삭제</h2>
+<h5 style="color:red;">아래 버튼을 클릭하는 순간 즉시 동아리 소개 페이지의 동아리 정보가 삭제되며, 한 번 실행하면 되돌릴 수 없습니다.</h5><br>
+
+
+
+{% csrf_token %}
+
+                <p class="h7">
+
+{% for club in clubs %}
+                <a href="/manager/delete_club/delete/{{club.id}}"><button type="button" class="btn btn-sm btn-outline-primary ">{{club.club_name}}</button></a> &nbsp;
+{% endfor %}
+
+
+
+            <br><br>
+            <div style="float:left">
+<a href="/manager">
+                <button class="btn btn-primary" type="submit">이전 화면으로</button></a>
+            </div>
+
+
+
+
+
+
+    <br><br>
+
+    <script src="/media/default/bootstrap.bundle.min.js"></script>
+
+
+{% else %}
+관리자 페이지에 접근할 수 없습니다.
+
+{% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block static %}
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+
+    <link href="/media/default/bootstrap.min.css" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<br>
+
+{% if user.is_superuser %}
+
+<h2>관리자 페이지</h2>
+관리자 페이지입니다.<br>사이트 관련 문의 : 이종우(010-8192-7493)<br><br>
+
+<!--<a href="/"><button class="btn btn-outline">사용방법</button></a><br><br>-->
+
+<a href="/admin"><button class="btn btn-outline-primary">사용자 관리</button></a><br><br>
+
+<!--<a href="/book/cancel_admin"><button class="btn btn-outline-primary">공동연습실 관리</button></a><br><br>-->
+
+<a href="/manager/popup"><button class="btn btn-outline-primary">팝업창 변경</button></a><br><br>
+
+<a href="/manager/front"><button class="btn btn-outline-primary">대문 변경</button></a><br><br>
+
+<a href="/manager/main_board"><button class="btn btn-outline-primary">메인 게시판 변경</button></a><br><br>
+
+<a href="/manager/intro"><button class="btn btn-outline-primary">동아리연합회 소개 페이지 수정</button></a><br><br>
+
+<a href="./terms"><button class="btn btn-outline-primary">각종 약관 변경</button></a><br><br>
+
+<a href="./email"><button class="btn btn-outline-primary">이메일 주소 변경</button></a><br><br>
+
+<a href="./email_all"><button class="btn btn-outline-primary">전체 메일 보내기</button></a><br><br>
+
+<a href="./class_add"><button class="btn btn-outline-primary">공동연습실 추가</button></a><br><br>
+
+<a href="./class_setting"><button class="btn btn-outline-primary">공동연습실 설정</button></a><br><br>
+
+
+<br><br>
+<a href="./class_delete"><button class="btn btn-outline-danger">공동연습실 삭제</button></a><br><br>
+
+
+
+
+<a href="./delete_club"><button class="btn btn-outline-danger">동아리 삭제</button></a><br><br>
+
+<!--<a href="/manager/maintenance"><button class="btn btn-outline-danger">사이트 점검 모드 실행/종료</button></a><br><br>-->
+
+<!--<a href="/manager/email"><button class="btn btn-outline-primary">알림 이메일 변경</button></a><br><br>-->
+
+<!--<a href="/manager/board"><button class="btn btn-outline-primary">게시판 추가/관리</button></a><br><br>-->
+
+
+{% else %}
+관리자 페이지에 접근할 수 없습니다.
+
+{% endif %}
+    <script src="/media/default/bootstrap.bundle.min.js"></script>
+
+{% endblock %}

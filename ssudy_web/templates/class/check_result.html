@@ -1,0 +1,86 @@
+
+
+
+
+{% block content %}
+
+
+
+
+
+<style>
+    table {
+    text-align: center;
+      border-collapse: collapse;
+
+    }
+
+    th, td {
+      border: 1px solid #dddddd;
+
+      padding: 8px;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+
+
+<body>
+
+      {% if valid == 'yes' %}
+      <h1 style="color:blue;">해당 문서는 유효합니다.</h1>
+      {% if post.stu != "" %}
+      학생서비스팀 승인완료 / 담당자 {{post.stu}}<br>
+      {% else %}
+      <div style="color:red">학생서비스팀 승인대기</div><br>
+      {% endif %}
+
+      {% if post.dy != "" %}
+      동아리연합회 승인완료 / 담당자 {{post.dy}}<br>
+      {% else %}
+      <div style="color:red">동아리연합회 승인대기</div><br>
+      {% endif %}
+<br><br>
+<table>
+  <tbody>
+    <!-- 2번째 행부터 7번째 행까지 -->
+    <tr>
+      <td>동아리 대표자</td>
+        <td colspan="5">{{post.name}}</td>
+
+    </tr>
+       <tr>
+      <td>신청 동아리</td>
+        <td colspan="5">{{post.club}}</td>
+
+    </tr>
+
+    <tr>
+      <td>사용 장소</td>
+        <td colspan="5">{{post.space}}</td>
+    </tr>
+    <tr>
+      <td>사용 일시</td>
+         <td colspan="5">{{post.date}}</td>
+    </tr>
+    <tr>
+      <td>사용 내용</td>
+        <td colspan="5">{{post.description}}</td>
+    </tr>
+
+      <tr>
+      <td>사용 인원</td>
+        <td colspan="5">{{post.people}}</td>
+    </tr>
+
+  </tbody>
+</table>
+      {% else %}
+       <h1 style="color:red;">해당 문서는 유효하지 않습니다.</h1>
+{% endif %}
+</body>
+
+
+{% endblock %}

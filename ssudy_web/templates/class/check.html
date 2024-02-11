@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>문서 진위여부 확인 페이지</title>
+  <script>
+    function redirectToPage() {
+      var currentURL = window.location.href;
+      var userInput = document.getElementById('urlInput').value;
+
+      // 입력값이 비어있지 않으면 리다이렉트
+      if (userInput.trim() !== '') {
+        // 입력값을 기반으로 새로운 URL 생성
+        var fullURL = currentURL + "result/"+ userInput;
+
+        window.location.href = fullURL;
+      }
+    }
+  </script>
+</head>
+<body>
+    <h2>문서 진위여부 확인 페이지</h2>
+  <label for="urlInput">문서확인번호 입력:</label>
+  <input type="text" id="urlInput" placeholder="ex) 1-ABCDEFGH12">
+  <button onclick="redirectToPage()">확인</button>
+</body>
+</html>

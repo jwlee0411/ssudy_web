@@ -1,0 +1,142 @@
+
+{% extends "base.html" %}
+
+{% block static %}
+   <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/cheatsheet/">
+
+
+
+
+    <link href="/media/default/bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+
+
+
+{% if post %}
+
+
+<style>
+
+
+    th, td {
+      border: 1px solid #dddddd;
+
+      padding: 8px;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+
+
+<body style="font-family: 'IBM Plex Sans KR', sans-serif;  ">
+
+    <div class="container" style="font-family: 'IBM Plex Sans KR', sans-serif;  ">
+
+
+
+<br><br>
+<h2 id = "titlefront" style="font-weight: 600">신청내역 확인</h2>
+<br><br>
+<table>
+  <tbody>
+    <!-- 2번째 행부터 7번째 행까지 -->
+    <tr>
+      <td>동아리 대표자</td>
+        <td colspan="5">{{post.name}}</td>
+
+    </tr>
+       <tr>
+      <td>신청 동아리</td>
+        <td colspan="5">{{ post.club }}</td>
+
+    </tr>
+       <tr>
+      <td>연락처</td>
+        <td colspan="5">{{post.phone_number}}</td>
+
+    </tr>
+             <tr>
+      <td>이메일</td>
+        <td colspan="5">{{post.email}}</td>
+    </tr>
+    <tr>
+      <td>사용 장소</td>
+        <td colspan="5">{{post.space}}</td>
+    </tr>
+    <tr>
+      <td>사용 일시</td>
+         <td colspan="5">{{ post.date }}</td>
+    </tr>
+    <tr>
+      <td>사용 내용</td>
+        <td colspan="5">{{post.description}}</td>
+    </tr>
+
+      <tr>
+      <td>사용 인원</td>
+        <td colspan="5">{{post.people}}</td>
+    </tr>
+
+   <tr>
+      <td>활동계획서</td>
+        <td colspan="5"><a href="/board/download/{{post.file1}}">{{post.file1}}</a></td>
+    </tr>
+
+  </tbody>
+</table>
+
+
+    문서확인번호 : {{post.id}}-{{post.checksum}}<br>
+ <br><br>
+
+{% if post.dy == "" %}
+동아리연합회 승인이 완료되지 않았습니다 <br>
+    {% else %}
+동아리연합회 승인이 완료되었습니다 <br>
+    {% endif %}
+
+{% if post.stu == "" %}
+학생서비스팀 승인이 완료되지 않았습니다 <br>
+    {% else %}
+학생서비스팀 승인이 완료되었습니다 <br>
+    {% endif %}
+
+        <br>
+{% for group in user.groups.all %}
+{% if group.name == "동아리연합회" %}
+    {% if post.dy == "" %}
+    위 내용을 확인 후 교내이용시설 사용을 승인합니다.
+    <a href="/class/confirm/{{post.id}}"><button class="btn btn-primary">승인</button></a>
+    {% else %}
+
+    {% endif %}
+{% endif %}
+{% if group.name == "학생서비스팀" %}
+    {% if post.stu == "" %}
+
+    {% if post.dy == "" %}
+    <div style="color:red;">★ 동아리연합회 승인이 되지 않은 문서입니다.</div>
+        {% else %}
+        위 내용을 확인 후 교내이용시설 사용을 승인합니다.
+        <a href="/class/confirm/{{post.id}}"><button class="btn btn-primary">승인</button></a>
+    {% endif %}
+
+    {% else %}
+    {% if post.dy == "" %}
+    <div style="color:red;">★ 동아리연합회 승인이 되지 않은 문서입니다.</div>
+    {% endif %}
+    {% endif %}
+{% endif %}
+
+{% endfor %}
+    </div>
+</body>
+        <script src="/media/default/bootstrap.bundle.min.js"></script>
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block static %}
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/media/default/bootstrap.min.css" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<br>
+
+{% if user.is_superuser %}
+
+<h2>메인 게시판 변경</h2>
+
+
+        <form method="post" enctype="multipart/form-data">
+
+{% csrf_token %}
+
+                <p class="h7">
+
+
+                <h5>메인 게시판</h5>
+
+                <div class="mb-3 col-md-6 col-3">
+                    <select class="form-select form-select-sm mb-3" aria-label=".form-select-lg example" name="board1">
+                        <option selected value="없음">게시판 선택</option>
+                        {% for board in Board %}
+                           <option value="{{board.board_title}}">{{board.board_title}}</option>
+                        {% endfor %}
+
+                    </select>
+                </div>
+
+<!--                <h5>메인 게시판 2</h5>-->
+<!--                <div class="mb-3 col-md-6 col-3">-->
+<!--                    <select class="form-select form-select-sm mb-3" aria-label=".form-select-lg example" name="board2">-->
+<!--                        <option selected value="없음">게시판 선택</option>-->
+<!--                        {% for board in Board %}-->
+<!--                           <option value="{{board.board_title}}">{{board.board_title}}</option>-->
+<!--                        {% endfor %}-->
+
+<!--                    </select>-->
+<!--                </div>-->
+
+
+            <br><br>
+            <div style="float:right">
+
+                <button class="btn btn-primary" type="submit">저장</button>
+            </div>
+
+
+        </form>
+
+
+
+
+    <br><br>
+
+    <script src="/media/default/bootstrap.bundle.min.js"></script>
+
+
+{% else %}
+관리자 페이지에 접근할 수 없습니다.
+
+{% endif %}
+
+
+{% endblock %}

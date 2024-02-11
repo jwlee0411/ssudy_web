@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block static %}
+
+    <!-- Bootstrap core CSS -->
+<link href="/media/default/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+
+<br><br>
+<div class = "container" style="font-family: 'IBM Plex Sans KR', sans-serif;  ">
+
+
+
+
+
+<h2><b style="color: black;">회원정보 수정</b></h2>
+        <a href="/common/mypage1"><button class="btn btn-primary" type="submit">수정하기</button></a>
+<br><br>
+
+
+
+{% for group in user.groups.all %}
+{% if group.name == "동아리" %}
+<h2><b style="color: black;">동아리 소개 수정</b></h2>
+        <a href="/common/mypage2"><button class="btn btn-primary" type="submit">수정하기</button></a>
+
+   <script src="/media/default/bootstrap.bundle.min.js"></script>
+{% endif %}
+{% endfor %}
+
+</div>
+
+{% else %}
+<br>
+해당 페이지에 접근할 수 없습니다.
+
+{% endif %}
+
+    <script src="/media/default/bootstrap.bundle.min.js"></script>
+{% endblock %}

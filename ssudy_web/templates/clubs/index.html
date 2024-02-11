@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block static %}
+
+    <!-- Bootstrap core CSS -->
+<link href="/media/default/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+
+
+
+  <div class="album py-5 bg-light" style="font-family: 'IBM Plex Sans KR', sans-serif;  ">
+    <div class="container">
+    <h2 style="font-weight:bold; color:black;">{{category}}</h2>
+        <h5><br></h5>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" >
+          {% for club in clubs %}
+          <a href="/clubs/info/{{club.id}}" style=" text-decoration:none; color:black;">
+       <div class="col">
+          <div class="card shadow-sm" style="overflow:hidden;">
+              {% if club.image %}
+            <img class="bd-placeholder-img image-thumbnail"  width="100%" height="100%" style="object-fit: cover; overflow:hidden;" src="/media/{{club.image}}">
+                {% else %}
+              <img class="bd-placeholder-img image-thumbnail" width="100%" height="100%" style="object-fit: cover; overflow:hidden;" src="/media/default/ssudy_logo_v2.png">
+              {% endif %}
+            <div class="card-body">
+                <h5 style="font-weight:bold;">{{club.club_name}}</h5>
+                {% if club.description and club.description != "None" %}
+              <p class="card-text">{{club.description}}</p>
+                {% else %}
+                <p class="card-text">동아리소개가 없습니다</p>
+                {% endif %}
+                <!-- <div class="btn-group">
+                    {% if club.sns1_name != "" and club.sns1_name is not null and club.sns1_link != "" and club.sns1_link is not null and club.sns1_name != "None" %}
+                  <a href="{{club.sns1_link}}" target="_blank"><button type="button" class="btn btn-sm btn-outline-secondary">{{club.sns1_name}}</button></a>
+                    {% endif %}
+                    {% if club.sns2_name != "" and club.sns2_name is not null and club.sns2_link != "" and club.sns2_link is not null and club.sns1_name != "None" %}
+                  <a href="{{club.sns2_link}}" target="_blank"><button type="button" class="btn btn-sm btn-outline-secondary">{{club.sns2_name}}</button></a>
+                    {% endif %}
+                </div> -->
+
+            </div>
+          </div>
+        </div>
+            </a>
+          {% endfor %}
+
+    </div>
+  </div>
+
+
+</div>
+   <script src="/media/default/bootstrap.bundle.min.js"></script>
+
+{% endblock %}

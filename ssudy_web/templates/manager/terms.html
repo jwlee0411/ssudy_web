@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block static %}
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/cheatsheet/">
+
+
+
+
+    <link href="/media/default/bootstrap.min.css" rel="stylesheet">
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<br>
+
+{% if user.is_superuser %}
+
+<h2>각종 약관 변경</h2>
+약관 변경 후에는 기존 약관으로 되돌릴 수 없습니다.<br>아래 약관 중 하나만 변경하더라도 3개의 파일을 모두 첨부해야 합니다.<br>pdf 파일만 첨부 가능합니다. <br><br><br>
+
+
+
+        <form method="post" enctype="multipart/form-data">
+
+{% csrf_token %}
+<h5>이용약관</h5>
+                <p class="h7"><div class="form-group">
+                    <input type="file" class="form-control" name="file1" id="file1">
+                </div><br>
+            <h5>개인정보처리방침</h5>
+            <p class="h7"><div class="form-group">
+                    <input type="file" class="form-control" name="file2" id="file2">
+                </div><br>
+            <h5>금지 행위 안내</h5>
+            <p class="h7"><div class="form-group">
+                    <input type="file" class="form-control" name="file3" id="file3">
+                </div><br><br>
+
+
+            <br><br>
+            <div style="float:right">
+
+                <button class="btn btn-primary" type="submit">저장</button>
+            </div>
+
+
+
+
+
+        </form>
+
+
+
+
+    <br><br>
+
+    <script src="/media/default/bootstrap.bundle.min.js"></script>
+
+
+{% else %}
+관리자 페이지에 접근할 수 없습니다.
+
+{% endif %}
+
+
+{% endblock %}
